@@ -4,18 +4,82 @@
   width: 100%;
 }
 
+//.main {
+//  //width: 35vw;
+//  height: 75vh;
+//  @include flex-center;
+//  flex-direction: column;
+//  background-color: $Dark-Grey;
+//  text-align: center;
+//  border-radius: 7px;
+
+
+.main {
+    //width: 35vw;
+    height: 75vh;
+    //@include flex-center;
+    flex-direction: column;
+    background-color: $Dark-Grey;
+    text-align: center;
+    border-radius: 7px;
+  //height: 75vh;
+  //@include flex-center;
+  //flex-direction: column;
+  //background-color: $Dark-Grey;
+  //text-align: center;
+  //border-radius: 7px;
+  //margin: auto; /* Center the .main container horizontally */
+  //padding: 20px;
+
+  > img {
+    width: 64px;
+    border-radius: 100%;
+    margin: 20px;
+  }
+
+  > .details {
+    margin-bottom: 12px;
+    > h2 {
+      font-weight: 600;
+      margin-bottom: 6px;
+    }
+    > small {
+      color: $Green;
+    }
+  }
+
+  > q {
+    font-size: smaller;
+    margin: 20px;
+  }
+
+  > app-mybutton {
+    width: 80%;
+  }
+
+  &:last-child {
+    margin-bottom: 20px;
+  }
+}
+
+
 .login-card {
   width: 35vw;
   height: auto;
-  @include flex-center;
+  //@include flex-center;
   flex-direction: column;
   background-color: $Dark-Grey;
   border-radius: 7px;
   padding: 20px;
 
+  mat-label {
+    color: $White;
+  }
+
   mat-form-field {
     margin-bottom: 20px;
     background-color: $Dark-Grey !important;
+    color: $White;
 
     ::ng-deep .mdc-text-field--filled:not(.mdc-text-field--disabled) {
       background-color: $Dark-Grey;

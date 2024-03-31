@@ -1,44 +1,44 @@
-<div class="main">
-  <mat-card class="login-card">
+    <div class="main">
+      <mat-card class="login-card">
 
-    <mat-card-header>
-      <mat-card-title>Login</mat-card-title>
-    </mat-card-header>
+        <mat-card-header class="justify-content-center">
+          <mat-card-title>Login</mat-card-title>
+        </mat-card-header>
 
-    <mat-card-content>
-      <form class="login-form" #loginForm="ngForm">
-        <mat-form-field class="full-width">
-          <mat-label>First Name</mat-label>
-          <input matInput name="firstName" [(ngModel)]="formData.firstName" required>
-          <mat-error *ngIf="loginForm.controls['firstName']?.hasError('required')">First Name is required</mat-error>
-        </mat-form-field>
+        <mat-card-content>
+          <form class="login-form" #loginForm="ngForm">
+            <mat-form-field class="full-width">
+              <mat-label>First Name</mat-label>
+              <input matInput name="firstName" [(ngModel)]="formData.firstName" required>
+              <mat-error *ngIf="loginForm.controls['firstName']?.hasError('required')">First Name is required</mat-error>
+            </mat-form-field>
 
-        <mat-form-field class="full-width" appearance="fill">
-          <mat-label>Last Name</mat-label>
-          <input matInput name="lastName" [(ngModel)]="formData.lastName" required>
-          <mat-error *ngIf="loginForm.controls['lastName']?.hasError('required')">Last Name is required</mat-error>
-        </mat-form-field>
+            <mat-form-field class="full-width" appearance="fill">
+              <mat-label>Last Name</mat-label>
+              <input matInput name="lastName" [(ngModel)]="formData.lastName" required>
+              <mat-error *ngIf="loginForm.controls['lastName']?.hasError('required')">Last Name is required</mat-error>
+            </mat-form-field>
 
-        <mat-form-field class="full-width" appearance="fill">
-          <mat-label>Username</mat-label>
-          <input matInput name="username" [(ngModel)]="formData.username" required pattern="[a-zA-Z0-9]+">
-          <mat-error *ngIf="loginForm.controls['username']?.hasError('required')">Username is required</mat-error>
-          <mat-error *ngIf="loginForm.controls['username']?.hasError('pattern')">Username can only contain letters and numbers</mat-error>
-        </mat-form-field>
+            <mat-form-field class="full-width" appearance="fill">
+              <mat-label>Username</mat-label>
+              <input matInput name="username" [(ngModel)]="formData.username" required pattern="[a-zA-Z0-9]+">
+              <mat-error *ngIf="loginForm.controls['username']?.hasError('required')">Username is required</mat-error>
+              <mat-error *ngIf="loginForm.controls['username']?.hasError('pattern')">Username can only contain letters and numbers</mat-error>
+            </mat-form-field>
 
-        <mat-form-field class="full-width" appearance="fill">
-          <mat-label>Password</mat-label>
-          <input matInput type="password" name="password" [(ngModel)]="formData.password" required>
-        </mat-form-field>
+            <mat-form-field class="full-width" appearance="fill">
+              <mat-label>Password</mat-label>
+              <input matInput type="password" name="password" [(ngModel)]="formData.password" required>
+            </mat-form-field>
 
-        <button mat-raised-button color="primary" type="submit" [disabled]="loginForm.invalid">Login</button>
+            <button mat-raised-button color="primary" type="submit" [disabled]="loginForm.invalid">Login</button>
 
-        <div class="button-row">
-          <a mat-button routerLink="/forgot-password">Forgot password?</a>
-          <span class="spacer"></span>
-          <a mat-button routerLink="/create-account">Create new account</a>
-        </div>
-      </form>
-    </mat-card-content>
-  </mat-card>
-</div>
+            <div class="button-row">
+              <a mat-button routerLink="/forgot-password">Forgot password?</a>
+              <span class="spacer"></span>
+              <a mat-button routerLink="/create-account">Create new account</a>
+            </div>
+          </form>
+        </mat-card-content>
+      </mat-card>
+    </div>

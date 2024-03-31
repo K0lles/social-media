@@ -6,25 +6,26 @@ $Grey: hsl(0, 0%, 20%);
 $Dark-Grey: hsl(0, 0%, 12%);
 $Off-Black: hsl(0, 0%, 8%);
 $Red: #f44336;
-
-@mixin flex-center {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  color: $White;
-}
-
+//
+//@mixin flex-center {
+//  display: flex;
+//  justify-content: center;
+//  align-items: center;
+//}
+//
+//* {
+//  margin: 0;
+//  padding: 0;
+//  box-sizing: border-box;
+//  color: $White;
+//}
+//
 body {
   height: 100vh;
-  @include flex-center;
+//  @include flex-center;
   background-color: $Off-Black;
   font: 14px 'Inter';
+  color: $White;
   letter-spacing: .5px;
 }
 
