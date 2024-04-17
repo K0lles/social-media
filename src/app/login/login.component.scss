@@ -1,5 +1,9 @@
 @import "../../styles";
 
+.main {
+  @include flex-center;
+}
+
 .full-width {
   width: 100%;
 }
