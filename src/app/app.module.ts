@@ -12,12 +12,14 @@ import {MatButtonModule} from "@angular/material/button";
 import { HeaderComponent } from './header/header.component';
 import {MatIconModule} from "@angular/material/icon";
 import {NgOptimizedImage} from "@angular/common";
+import { RegistrationComponent } from './registration/registration.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
-    HeaderComponent
+    HeaderComponent,
+    RegistrationComponent
   ],
     imports: [
         BrowserModule,

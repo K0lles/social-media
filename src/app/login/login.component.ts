@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
+import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 
 @Component({
   selector: 'app-login',
@@ -7,28 +7,20 @@ import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent {
-  registrationForm: FormGroup;
+  loginForm: FormGroup;
 
   constructor(private fb: FormBuilder) {
-    this.registrationForm = this.fb.group({
-      firstName: ['', Validators.required],
-      lastName: ['', Validators.required],
-      username: ['', Validators.pattern('^[a-zA-Z0-9]*$')],
-      password: ['', [Validators.required]],
-      repeatPassword: ['', Validators.required]
-    }, { validators: [this.checkPassword]})
+    this.loginForm = this.fb.group({
+      username: ['', Validators.required],
+      password: ['', [Validators.required, Validators.minLength(6)]],
+    })
   }
 
-  checkPassword(group: FormGroup) {
-    let passwordValue = group.get('password')?.value;
-    let repeatPasswordValue = group.get('repeatPassword')?.value;
-
-    if (repeatPasswordValue === passwordValue) {
-      group.get('repeatPassword')?.setErrors(null)
-      return null;
-    } else {
-      group.get('repeatPassword')?.setErrors({ notSame: true})
-      return {notSame: true}
-    }
+  login() {
+    let loginData = {
+      username: this.loginForm.controls['username'].value,
+      password: this.loginForm.controls['password'].value
+    };
+    console.log(loginData);
   }
 }
