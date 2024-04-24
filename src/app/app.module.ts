@@ -13,13 +13,15 @@ import { HeaderComponent } from './header/header.component';
 import {MatIconModule} from "@angular/material/icon";
 import {NgOptimizedImage} from "@angular/common";
 import { RegistrationComponent } from './registration/registration.component';
+import { ChatComponent } from './chat/chat.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     HeaderComponent,
-    RegistrationComponent
+    RegistrationComponent,
+    ChatComponent
   ],
     imports: [
         BrowserModule,
