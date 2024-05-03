@@ -62,7 +62,8 @@
 
     <div class="input-area">
       <mat-form-field appearance="fill">
-        <input matInput type="text" placeholder="Напишіть повідомлення...">
+        <textarea matInput cdkTextareaAutosize cdkAutosizeMinRows="1"
+                  cdkAutosizeMaxRows="5" type="text" placeholder="Напишіть повідомлення..." style="max-height: 45px;"></textarea>
       </mat-form-field>
       <button mat-raised-button color="primary">Надіслати</button>
     </div>

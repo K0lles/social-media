@@ -14,6 +14,7 @@ import {MatIconModule} from "@angular/material/icon";
 import {NgOptimizedImage} from "@angular/common";
 import { RegistrationComponent } from './registration/registration.component';
 import { ChatComponent } from './chat/chat.component';
+import { ChatListComponent } from './chat-list/chat-list.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { ChatComponent } from './chat/chat.component';
     LoginComponent,
     HeaderComponent,
     RegistrationComponent,
-    ChatComponent
+    ChatComponent,
+    ChatListComponent
   ],
     imports: [
         BrowserModule,
