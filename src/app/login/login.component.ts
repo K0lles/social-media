@@ -21,6 +21,5 @@ export class LoginComponent {
       username: this.loginForm.controls['username'].value,
       password: this.loginForm.controls['password'].value
     };
-    console.log(loginData);
   }
 }

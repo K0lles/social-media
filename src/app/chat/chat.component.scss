@@ -1,16 +1,5 @@
 @import "../../styles";
 
-.main {
-  width: 65vw;
-  height: 90vh;
-  @include flex-center;
-  flex-direction: column;
-  background-color: $Dark-Grey;
-  text-align: center;
-  border-radius: 7px;
-  padding: 20px;
-}
-
 .chat-container {
   display: flex;
   justify-content: center;

@@ -15,6 +15,7 @@ import {NgOptimizedImage} from "@angular/common";
 import { RegistrationComponent } from './registration/registration.component';
 import { ChatComponent } from './chat/chat.component';
 import { ChatListComponent } from './chat-list/chat-list.component';
+import { PostListComponent } from './post-list/post-list.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { ChatListComponent } from './chat-list/chat-list.component';
     HeaderComponent,
     RegistrationComponent,
     ChatComponent,
-    ChatListComponent
+    ChatListComponent,
+    PostListComponent
   ],
     imports: [
         BrowserModule,
