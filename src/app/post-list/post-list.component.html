@@ -1,114 +1,25 @@
 <div class="post-container">
-  <div class="post">
-    <div class="header">
-      <div class="author-info">
-        <img src="assets/images/avatar-jessica.jpeg" class="thumbnail">
-        <div class="username">Username</div>
+  <div *ngFor="let i of this.SomeCounter" class="post">
+      <div class="header">
+        <div class="author-info">
+          <img src="assets/images/avatar-jessica.jpeg" class="thumbnail">
+          <div class="username">Username</div>
+        </div>
+        <div class="burger-menu">
+          <button mat-icon-button [matMenuTriggerFor]="menu">
+            <mat-icon>more_vert</mat-icon>
+          </button>
+          <mat-menu #menu="matMenu">
+            <button mat-menu-item>Опція 1</button>
+            <button mat-menu-item>Опція 2</button>
+            <button mat-menu-item>Опція 3</button>
+          </mat-menu>
+        </div>
       </div>
-      <div class="burger-menu"></div>
-    </div>
-    <div class="main">
-      <div class="photo"></div>
-      <div class="text">Текст допису</div>
-    </div>
-    <a href="#" class="comments">187 коментарів</a>
-  </div>
-  <div class="post">
-    <div class="header">
-      <div class="author-info">
-        <div class="thumbnail"></div>
-        <div class="username">Username</div>
+      <div class="main">
+        <div class="photo"></div>
+        <div class="text">Текст допису</div>
       </div>
-      <div class="burger-menu"></div>
-    </div>
-    <div class="main">
-      <div class="photo"></div>
-      <div class="text">Текст допису</div>
-    </div>
-    <a href="#" class="comments">187 коментарів</a>
-  </div>
-  <div class="post">
-    <div class="header">
-      <div class="author-info">
-        <div class="thumbnail"></div>
-        <div class="username">Username</div>
-      </div>
-      <div class="burger-menu"></div>
-    </div>
-    <div class="main">
-      <div class="photo"></div>
-      <div class="text">Текст допису</div>
-    </div>
-    <a href="#" class="comments">187 коментарів</a>
-  </div>
-  <div class="post">
-    <div class="header">
-      <div class="author-info">
-        <div class="thumbnail"></div>
-        <div class="username">Username</div>
-      </div>
-      <div class="burger-menu"></div>
-    </div>
-    <div class="main">
-      <div class="photo"></div>
-      <div class="text">Текст допису</div>
-    </div>
-    <a href="#" class="comments">187 коментарів</a>
-  </div>
-  <div class="post">
-    <div class="header">
-      <div class="author-info">
-        <div class="thumbnail"></div>
-        <div class="username">Username</div>
-      </div>
-      <div class="burger-menu"></div>
-    </div>
-    <div class="main">
-      <div class="photo"></div>
-      <div class="text">Текст допису</div>
-    </div>
-    <a href="#" class="comments">187 коментарів</a>
-  </div>
-  <div class="post">
-    <div class="header">
-      <div class="author-info">
-        <div class="thumbnail"></div>
-        <div class="username">Username</div>
-      </div>
-      <div class="burger-menu"></div>
-    </div>
-    <div class="main">
-      <div class="photo"></div>
-      <div class="text">Текст допису</div>
-    </div>
-    <a href="#" class="comments">187 коментарів</a>
-  </div>
-  <div class="post">
-    <div class="header">
-      <div class="author-info">
-        <div class="thumbnail"></div>
-        <div class="username">Username</div>
-      </div>
-      <div class="burger-menu"></div>
-    </div>
-    <div class="main">
-      <div class="photo"></div>
-      <div class="text">Текст допису</div>
-    </div>
-    <a href="#" class="comments">187 коментарів</a>
-  </div>
-  <div class="post">
-    <div class="header">
-      <div class="author-info">
-        <div class="thumbnail"></div>
-        <div class="username">Username</div>
-      </div>
-      <div class="burger-menu"></div>
-    </div>
-    <div class="main">
-      <div class="photo"></div>
-      <div class="text">Текст допису</div>
-    </div>
-    <a href="#" class="comments">187 коментарів</a>
+      <a href="#" class="comments">187 коментарів</a>
   </div>
 </div>

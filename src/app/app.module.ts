@@ -16,6 +16,8 @@ import { RegistrationComponent } from './registration/registration.component';
 import { ChatComponent } from './chat/chat.component';
 import { ChatListComponent } from './chat-list/chat-list.component';
 import { PostListComponent } from './post-list/post-list.component';
+import {MatMenuModule} from "@angular/material/menu";
+import {CdkMenu, CdkMenuItem} from "@angular/cdk/menu";
 
 @NgModule({
   declarations: [
@@ -27,18 +29,19 @@ import { PostListComponent } from './post-list/post-list.component';
     ChatListComponent,
     PostListComponent
   ],
-    imports: [
-        BrowserModule,
-        AppRoutingModule,
-        BrowserAnimationsModule,
-        MatCardModule,
-        FormsModule,
-        MatInputModule,
-        MatButtonModule,
-        MatIconModule,
-        NgOptimizedImage,
-        ReactiveFormsModule
-    ],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    BrowserAnimationsModule,
+    MatCardModule,
+    FormsModule,
+    MatInputModule,
+    MatButtonModule,
+    MatIconModule,
+    NgOptimizedImage,
+    ReactiveFormsModule,
+    MatMenuModule
+  ],
   providers: [],
   bootstrap: [AppComponent]
 })
