@@ -17,7 +17,6 @@ import { ChatComponent } from './chat/chat.component';
 import { ChatListComponent } from './chat-list/chat-list.component';
 import { PostListComponent } from './post-list/post-list.component';
 import {MatMenuModule} from "@angular/material/menu";
-import {CdkMenu, CdkMenuItem} from "@angular/cdk/menu";
 import { PostCommentsComponent } from './post-comments/post-comments.component';
 
 @NgModule({

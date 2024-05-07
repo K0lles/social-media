@@ -2,30 +2,29 @@
   <div class="post">
     <div class="header">
       <div class="author-info">
-        <img src="assets/images/avatar-jessica.jpeg" class="thumbnail">
-        <div class="username">Username</div>
+        <img src="{{ post.userLogo }}" class="thumbnail">
+        <div class="username">{{ post.username }}</div>
       </div>
       <div class="burger-menu">
         <button mat-icon-button [matMenuTriggerFor]="menu">
           <mat-icon>more_vert</mat-icon>
         </button>
         <mat-menu #menu="matMenu">
-          <button mat-menu-item>Опція 1</button>
+          <button mat-menu-item>Зберегти</button>
           <button mat-menu-item>Опція 2</button>
           <button mat-menu-item>Опція 3</button>
         </mat-menu>
       </div>
     </div>
     <div class="main">
-      <div class="photo"></div>
-      <div class="text">Текст допису</div>
+      <img src="{{ post.image }}" class="photo"/>
+      <div class="text">{{ post.text }}</div>
     </div>
-    <a mat-stroked-button href="#" class="comments">187 коментарів</a>
   </div>
   <div class="comments-container">
     <div class="comment" *ngFor="let comment of comments">
       <div class="comment-header">
-        <img src="assets/images/avatar-jessica.jpeg" class="thumbnail">
+        <img src="{{ comment.userImage }}" class="thumbnail">
       </div>
       <div class="comment-body">
         <div class="username">{{comment.username}}</div>
