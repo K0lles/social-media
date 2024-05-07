@@ -1,5 +1,5 @@
 <div class="post-container">
-  <div *ngFor="let i of this.SomeCounter" class="post">
+  <div *ngFor="let i of [1]" class="post">
       <div class="header">
         <div class="author-info">
           <img src="assets/images/avatar-jessica.jpeg" class="thumbnail">
@@ -20,6 +20,6 @@
         <div class="photo"></div>
         <div class="text">Текст допису</div>
       </div>
-      <a href="#" class="comments">187 коментарів</a>
+      <a mat-stroked-button href="#" class="comments">187 коментарів</a>
   </div>
 </div>

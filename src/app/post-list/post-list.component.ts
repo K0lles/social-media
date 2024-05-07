@@ -8,5 +8,4 @@ import { Component } from '@angular/core';
 export class PostListComponent {
 
   public SomeCounter: number[] = [1, 1, 1, 1, 1];
-
 }
