@@ -1,5 +1,5 @@
 <header class="header">
-  <div class="inner-header-block">
+  <div routerLink="/" class="inner-header-block main-logo">
     <div class="flex-item"><img class="header-logo" src="assets/images/favicon-32x32.png"></div>
     <div class="flex-item"><h3>Social Media App</h3></div>
   </div>
@@ -7,7 +7,7 @@
     <div class="flex-item"><img src="assets/images/avatar-jessica.jpeg" class="header-logo"></div>
     <div class="flex-item"><span class="user-name">{{user.lastName}} {{user.firstName}}</span></div>
     <div class="flex-item">
-        <button mat-icon-button><mat-icon>message</mat-icon></button>
+        <a routerLink="/messages" mat-icon-button><mat-icon>message</mat-icon></a>
     </div>
   </div>
 </header>
