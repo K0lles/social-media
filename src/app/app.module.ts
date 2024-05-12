@@ -6,18 +6,29 @@ import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatCardModule} from "@angular/material/card";
-import {FormsModule} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {MatInputModule} from "@angular/material/input";
 import {MatButtonModule} from "@angular/material/button";
 import { HeaderComponent } from './header/header.component';
 import {MatIconModule} from "@angular/material/icon";
 import {NgOptimizedImage} from "@angular/common";
+import { RegistrationComponent } from './registration/registration.component';
+import { ChatComponent } from './chat/chat.component';
+import { ChatListComponent } from './chat-list/chat-list.component';
+import { PostListComponent } from './post-list/post-list.component';
+import {MatMenuModule} from "@angular/material/menu";
+import { PostCommentsComponent } from './post-comments/post-comments.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
-    HeaderComponent
+    HeaderComponent,
+    RegistrationComponent,
+    ChatComponent,
+    ChatListComponent,
+    PostListComponent,
+    PostCommentsComponent
   ],
   imports: [
     BrowserModule,
@@ -28,7 +39,9 @@ import {NgOptimizedImage} from "@angular/common";
     MatInputModule,
     MatButtonModule,
     MatIconModule,
-    NgOptimizedImage
+    NgOptimizedImage,
+    ReactiveFormsModule,
+    MatMenuModule
   ],
   providers: [],
   bootstrap: [AppComponent]

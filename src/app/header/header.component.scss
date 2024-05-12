@@ -1,42 +1,34 @@
 @import "../../styles";
 
 .header {
-  background-color: $Dark-Grey;
-  color: $White;
-  padding: 10px 20px;
   display: flex;
+  justify-content: space-around;
   align-items: center;
-  position: fixed;
+  flex-wrap: wrap;
+  position: sticky;
   top: 0;
-  width: calc(100% / 3); // Set width to one-third of the viewport width
-  left: calc((100% / 3)); // Center the header horizontally
-  z-index: 1000; // Ensure it's on top of other content
+  z-index: 1;
+  background-color: $Off-Black;
 }
 
-.logo-container,
-.user-info {
+.main-logo {
+  cursor: pointer;
+}
+
+.header-logo {
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+}
+
+.inner-header-block {
   display: flex;
+  justify-content: space-between;
   align-items: center;
+  padding-right: 10px;
+  flex-wrap: wrap;
 }
 
-.logo-container img {
-  width: 30px; // Adjust as needed
-  height: 30px; // Adjust as needed
-  margin-right: 10px;
-}
-
-.app-name,
-.user-name {
-  font-size: 1.2rem;
-}
-
-.spacer {
-  flex: 1; // Take up remaining space in the header
-}
-
-.user-photo {
-  width: 30px; // Adjust as needed
-  height: 30px; // Adjust as needed
-  border-radius: 50%; // Make it round
-  margin-right: 10px;
+.flex-item {
+  margin: 10px;
 }

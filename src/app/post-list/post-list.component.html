@@ -1,0 +1,25 @@
+<div class="post-container">
+  <div *ngFor="let post of posts" class="post">
+      <div class="header">
+        <div class="author-info">
+          <img src="{{ post.userLogo }}" class="thumbnail">
+          <div class="username">{{ post.username }}</div>
+        </div>
+        <div class="burger-menu">
+          <button mat-icon-button [matMenuTriggerFor]="menu">
+            <mat-icon>more_vert</mat-icon>
+          </button>
+          <mat-menu #menu="matMenu">
+            <button mat-menu-item>Зберегти</button>
+            <button mat-menu-item>Опція 2</button>
+            <button mat-menu-item>Опція 3</button>
+          </mat-menu>
+        </div>
+      </div>
+      <div class="main">
+        <img src="{{ post.image }}" class="photo"/>
+        <div class="text">{{ post.text }}</div>
+      </div>
+      <a mat-stroked-button routerLink="/comments/{{post.id}}" class="comments">{{ post.commentsAmount }} коментарів</a>
+  </div>
+</div>
