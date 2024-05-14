@@ -1,9 +1,10 @@
 from django.contrib.auth.models import User
-from rest_framework.decorators import action
 from rest_framework import permissions, status
+from rest_framework.decorators import action
 from rest_framework.request import Request
 from rest_framework.response import Response
 from rest_framework.viewsets import ModelViewSet
+
 from . import serializers
 
 
@@ -31,5 +32,7 @@ class UserModelViewSet(ModelViewSet):
 
     @action(methods=["GET"], detail=False, url_path="user-info")
     def user_info(self, request: Request, *args, **kwargs):
-        serializer: serializers.ModelSerializer = self.get_serializer(instance=request.user)
+        serializer: serializers.ModelSerializer = self.get_serializer(
+            instance=request.user
+        )
         return Response(data=serializer.data, status=status.HTTP_200_OK)
