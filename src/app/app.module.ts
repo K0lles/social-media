@@ -18,6 +18,7 @@ import { ChatListComponent } from './chat-list/chat-list.component';
 import { PostListComponent } from './post-list/post-list.component';
 import {MatMenuModule} from "@angular/material/menu";
 import { PostCommentsComponent } from './post-comments/post-comments.component';
+import {HttpClient, HttpClientModule} from "@angular/common/http";
 
 @NgModule({
   declarations: [
@@ -31,6 +32,7 @@ import { PostCommentsComponent } from './post-comments/post-comments.component';
     PostCommentsComponent
   ],
   imports: [
+    HttpClientModule,
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
