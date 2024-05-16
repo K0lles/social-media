@@ -5,13 +5,14 @@ import {RegistrationComponent} from "./registration/registration.component";
 import {PostListComponent} from "./post-list/post-list.component";
 import {PostCommentsComponent} from "./post-comments/post-comments.component";
 import {ChatListComponent} from "./chat-list/chat-list.component";
+import {authGuard} from "./guards/auth.guard";
 
 const routes: Routes = [
-  { path: "", component: PostListComponent },
+  { path: "", component: PostListComponent, canActivate: [authGuard] },
   { path: "login", component: LoginComponent },
   { path: "sign-up", component: RegistrationComponent },
-  { path: "comments/:postId", component: PostCommentsComponent },
-  { path: "messages", component: ChatListComponent }
+  { path: "comments/:postId", component: PostCommentsComponent, canActivate: [authGuard] },
+  { path: "messages", component: ChatListComponent, canActivate: [authGuard] }
 ];
 
 @NgModule({

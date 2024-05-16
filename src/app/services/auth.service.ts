@@ -1,6 +1,7 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {lastValueFrom} from "rxjs";
+import {Router} from "@angular/router";
 
 @Injectable({
   providedIn: 'root'
@@ -8,7 +9,7 @@ import {lastValueFrom} from "rxjs";
 export class AuthService {
   user: User | undefined;
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private router: Router) { }
 
   async login(loginData: {username: string, password: string}) {
     let response = await lastValueFrom(this.http.post<Login>('/api/v1/auth/login/',loginData))
@@ -17,6 +18,28 @@ export class AuthService {
     localStorage.setItem('accessToken', accessToken);
     localStorage.setItem('refreshToken', refreshToken);
     await this.getUserInfo();
+  }
+
+  getUserFromToken() {
+    let accessToken = localStorage.getItem('accessToken');
+    this.http.get<User>('api/v1/auth/user-info/', {headers: {'Authorization': `Bearer ${accessToken}`}})
+      .subscribe(response => {
+
+    })
+  }
+
+  initialize() {
+    if (!this.isAuthenticated) {
+      if (!this.hasAccessToken) {
+        this.router.navigate(['/login']);
+        return;
+      }
+
+    }
+  }
+
+  get hasAccessToken(): boolean {
+    return !!localStorage.getItem('accessToken');
   }
 
   async getUserInfo() {
@@ -31,12 +54,20 @@ export class AuthService {
         username: responseUser.username,
         email: responseUser.email
       };
-      console.log(this.user);
     }
   }
 
   get isAuthenticated(): boolean {
-    return !!localStorage.getItem('accessToken');
+    return !!this.user;
+  }
+
+  canActivate(): boolean {
+    this.getUserInfo();
+    if (!this.user) {
+      this.router.navigate(['/login']);
+      return false;
+    }
+    return true;
   }
 
 }

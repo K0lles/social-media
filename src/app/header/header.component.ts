@@ -9,7 +9,7 @@ import {AuthService} from "../services/auth.service";
 export class HeaderComponent implements OnInit{
 
   async ngOnInit() {
-    await this.authService.getUserInfo();
+    // await this.authService.getUserInfo();
   }
 
   constructor(private authService: AuthService) {
@@ -21,7 +21,7 @@ export class HeaderComponent implements OnInit{
 
   get user(): any {
     if (this.authService.isAuthenticated) {
-    return this.authService.user;
+      return this.authService.user;
     }
   }
 }
