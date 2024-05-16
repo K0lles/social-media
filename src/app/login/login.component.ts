@@ -13,7 +13,7 @@ export class LoginComponent implements OnInit{
   constructor(private authService: AuthService, private fb: FormBuilder) {
     this.loginForm = this.fb.group({
       username: ['', Validators.required],
-      password: ['', [Validators.required, Validators.minLength(6)]],
+      password: ['', [Validators.required]],
     })
   }
 
@@ -21,13 +21,13 @@ export class LoginComponent implements OnInit{
   }
 
   login() {
-    if (!this.authService.isAuthenticated) {
+    // if (!this.authService.isAuthenticated) {
       let loginData = {
         username: this.loginForm.controls['username'].value,
         password: this.loginForm.controls['password'].value
       };
       this.authService.login(loginData);
       console.log(localStorage.length);
-    }
+    // }
   }
 }

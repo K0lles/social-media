@@ -4,8 +4,13 @@
     <div class="flex-item"><h3>Social Media App</h3></div>
   </div>
   <div class="inner-header-block">
-    <div class="flex-item"><img src="assets/images/avatar-jessica.jpeg" class="header-logo"></div>
-    <div class="flex-item"><span class="user-name">{{user.lastName}} {{user.firstName}}</span></div>
+    <ng-container *ngIf="isAuthenticated">
+      <div class="flex-item"><img src="assets/images/empty-user.jpg" class="header-logo"></div>
+      <div class="flex-item"><span class="user-name">{{user.lastName}} {{user.firstName}}</span></div>
+    </ng-container>
+    <ng-container *ngIf="isAuthenticated">
+
+    </ng-container>
     <div class="flex-item">
         <a routerLink="/messages" mat-icon-button><mat-icon>message</mat-icon></a>
     </div>

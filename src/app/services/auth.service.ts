@@ -1,24 +1,38 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
+import {lastValueFrom} from "rxjs";
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
+  user: User | undefined;
 
   constructor(private http: HttpClient) { }
 
-  // Observable<HttpResponse<any>>
-  login(loginData: {username: string, password: string}): void {
-    if (localStorage.getItem("accessToken")) {
-      return;
+  async login(loginData: {username: string, password: string}) {
+    let response = await lastValueFrom(this.http.post<Login>('/api/v1/auth/login/',loginData))
+    let accessToken = response.access;
+    let refreshToken = response.refresh;
+    localStorage.setItem('accessToken', accessToken);
+    localStorage.setItem('refreshToken', refreshToken);
+    await this.getUserInfo();
+  }
+
+  async getUserInfo() {
+    if (this.isAuthenticated) {
+      let responseUser = await lastValueFrom(this.http.get<any>(
+        'api/v1/auth/user-info/',
+        {headers: {'Authorization': `Bearer ${localStorage.getItem('accessToken')}`}}
+      ));
+      this.user = {
+        firstName: responseUser.first_name,
+        lastName: responseUser.last_name,
+        username: responseUser.username,
+        email: responseUser.email
+      };
+      console.log(this.user);
     }
-    this.http.post<Login>(ROOT_URL, loginData).subscribe(response => {
-      let accessToken = response.access_token;
-      let refreshToken = response.refresh_token;
-      localStorage.setItem('accessToken', accessToken);
-      localStorage.setItem('refreshToken', refreshToken);
-    });
   }
 
   get isAuthenticated(): boolean {
@@ -27,9 +41,15 @@ export class AuthService {
 
 }
 
-export const ROOT_URL = '127.0.0.1'
+
+export interface User {
+  firstName: string,
+  lastName: string,
+  username: string
+  email: string
+}
 
 export interface Login {
-  access_token: string;
-  refresh_token: string;
+  access: string;
+  refresh: string;
 }
