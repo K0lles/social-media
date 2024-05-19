@@ -20,8 +20,6 @@ export class HeaderComponent implements OnInit{
   }
 
   get user(): any {
-    if (this.authService.isAuthenticated) {
-      return this.authService.user;
-    }
+    return this.authService.user;
   }
 }
