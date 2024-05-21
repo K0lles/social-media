@@ -4,15 +4,27 @@
     <div class="flex-item"><h3>Social Media App</h3></div>
   </div>
   <div class="inner-header-block">
-    <ng-container *ngIf="isAuthenticated">
+    <ng-container *ngIf="isAuthenticated; else showLoginButton">
       <div class="flex-item"><img src="assets/images/empty-user.jpg" class="header-logo"></div>
       <div class="flex-item"><span class="user-name">{{user?.lastName}} {{user?.firstName}}</span></div>
     </ng-container>
-    <ng-container *ngIf="isAuthenticated">
-
-    </ng-container>
+    <ng-template #showLoginButton>
+      <button mat-raised-button routerLink="/login" color="primary">Login or create account</button>
+    </ng-template>
     <div class="flex-item">
         <a routerLink="/messages" mat-icon-button><mat-icon>message</mat-icon></a>
     </div>
+    <ng-container *ngIf="isAuthenticated">
+      <div class="burger-menu">
+        <button mat-icon-button [matMenuTriggerFor]="auth">
+          <mat-icon>more_vert</mat-icon>
+        </button>
+        <mat-menu #auth="matMenu">
+          <button mat-menu-item (click)="logout()">Log out</button>
+          <button mat-menu-item>Account settings</button>
+          <button mat-menu-item>Опція 3</button>
+        </mat-menu>
+      </div>
+    </ng-container>
   </div>
 </header>

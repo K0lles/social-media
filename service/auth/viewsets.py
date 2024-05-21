@@ -4,6 +4,7 @@ from rest_framework.decorators import action
 from rest_framework.request import Request
 from rest_framework.response import Response
 from rest_framework.viewsets import ModelViewSet
+from rest_framework_simplejwt.tokens import RefreshToken
 
 from . import serializers
 
@@ -36,3 +37,15 @@ class UserModelViewSet(ModelViewSet):
             instance=request.user
         )
         return Response(data=serializer.data, status=status.HTTP_200_OK)
+
+    @action(methods=["POST"], detail=False, url_path="logout")
+    def logout(self, request: Request, *args, **kwargs):
+        if not self.request.user:
+            return Response(
+                data={"detail": "You are not logged in."}, status=status.HTTP_401_UNAUTHORIZED
+            )
+        if not request.data.get("refresh_token"):
+            return Response(data={"detail": "Refresh token was not provided."}, status=status.HTTP_400_BAD_REQUEST)
+        token = RefreshToken(request.data.get("refresh_token"))
+        token.blacklist()
+        return Response(status=status.HTTP_205_RESET_CONTENT)

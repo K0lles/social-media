@@ -89,6 +89,7 @@ export class AuthService {
         this.http.post<{ access: string; refresh: string }>('/api/v1/auth/token/refresh/', { refresh: refreshToken })
       );
       localStorage.setItem('accessToken', response.access);
+      localStorage.setItem('refreshToken', response.refresh);
       // Ensure that getUserFromToken is only called if tokens are successfully refreshed
       await this.getUserFromToken();
       return;
@@ -101,6 +102,17 @@ export class AuthService {
     }
   }
 
+  async logout() {
+    await lastValueFrom(
+      this.http.post<any>(
+        'api/v1/auth/logout/',
+        {
+          'refresh_token': localStorage.getItem('refreshToken')
+        }
+      )
+    )
+  }
+
   async initialize() {
     if (!this.isAuthenticated) {
       if (!this.localStorageHasAccessToken) {
@@ -110,7 +122,6 @@ export class AuthService {
       await this.getUserFromToken();
     }
   }
-
 }
 
 
