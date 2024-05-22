@@ -18,9 +18,10 @@ import { ChatListComponent } from './chat-list/chat-list.component';
 import { PostListComponent } from './post-list/post-list.component';
 import { MatMenuModule } from "@angular/material/menu";
 import { PostCommentsComponent } from './post-comments/post-comments.component';
-import { HttpClientModule } from "@angular/common/http";
+import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
 import { MatSnackBarModule } from "@angular/material/snack-bar";
 import {AuthService} from "./services/auth.service";
+import {AuthInterceptor} from "./interceptors/auth.interceptor";
 
 export function initializeAppFactory(authService: AuthService) {
   return async () => {
@@ -55,7 +56,8 @@ export function initializeAppFactory(authService: AuthService) {
     MatSnackBarModule
   ],
   providers: [
-    {provide: APP_INITIALIZER, useFactory: initializeAppFactory, deps: [AuthService], multi: true}
+    {provide: APP_INITIALIZER, useFactory: initializeAppFactory, deps: [AuthService], multi: true},
+    {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true}
   ],
   bootstrap: [AppComponent]
 })

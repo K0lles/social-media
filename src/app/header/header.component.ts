@@ -25,7 +25,6 @@ export class HeaderComponent implements OnInit{
   }
 
   async logout() {
-
-    await this.router.navigate(['/login']);
+    await this.authService.logout();
   }
 }

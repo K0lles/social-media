@@ -103,14 +103,29 @@ export class AuthService {
   }
 
   async logout() {
-    await lastValueFrom(
-      this.http.post<any>(
-        'api/v1/auth/logout/',
-        {
-          'refresh_token': localStorage.getItem('refreshToken')
-        }
-      )
-    )
+    try {
+      let response = await lastValueFrom(
+        this.http.post<any>(
+          'api/v1/auth/logout/',
+          {
+            'refresh_token': localStorage.getItem('refreshToken')
+          },
+          {
+            headers: new HttpHeaders({
+              'Authorization': `Bearer ${localStorage.getItem('accessToken')}`
+            })
+          }
+        )
+      );
+      localStorage.removeItem('accessToken');
+      localStorage.removeItem('refreshToken')
+      this.user = undefined;
+      await this.router.navigate(['/login'])
+    } catch (error) {
+      this.snackBar.open(
+        "Something went wrong", 'Close', {horizontalPosition: 'right', verticalPosition: 'top'}
+      );
+    }
   }
 
   async initialize() {
