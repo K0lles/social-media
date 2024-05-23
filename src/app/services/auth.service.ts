@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpErrorResponse, HttpHeaders} from "@angular/common/http";
-import {lastValueFrom} from "rxjs";
+import {catchError, lastValueFrom} from "rxjs";
 import {Router} from "@angular/router";
 import {MatSnackBar} from "@angular/material/snack-bar";
 
@@ -65,6 +65,7 @@ export class AuthService {
         })
       );
       this.user = {
+        id: response.id,
         lastName: response.last_name,
         firstName: response.first_name,
         email: response.email,
@@ -128,6 +129,24 @@ export class AuthService {
     }
   }
 
+  async signUpUser(data: UserSignUp) {
+    try {
+      let response = await lastValueFrom(this.http.post<UserSignUp>(
+        '/api/v1/auth/signup/', data)
+      );
+    } catch(error: any) {
+      if (error instanceof HttpErrorResponse) {
+        if (error.status === 400) {
+          debugger;
+          this.snackBar.open("User with this email already exists.", "Close", {
+            horizontalPosition: "end",
+            verticalPosition: "top"
+          });
+        }
+      }
+    }
+  }
+
   async initialize() {
     if (!this.isAuthenticated) {
       if (!this.localStorageHasAccessToken) {
@@ -141,6 +160,7 @@ export class AuthService {
 
 
 export interface UserResponse {
+  id: number
   first_name: string
   last_name: string
   email: string
@@ -148,8 +168,9 @@ export interface UserResponse {
 }
 
 export interface User {
-  firstName: string,
-  lastName: string,
+  id: string
+  firstName: string
+  lastName: string
   username: string
   email: string
 }
@@ -157,4 +178,11 @@ export interface User {
 export interface Login {
   access: string;
   refresh: string;
+}
+
+export interface UserSignUp extends UserResponse{
+  first_name: string
+  last_name: string
+  email: string
+  username: string
 }
