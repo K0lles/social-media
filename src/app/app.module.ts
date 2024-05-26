@@ -22,6 +22,7 @@ import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
 import { MatSnackBarModule } from "@angular/material/snack-bar";
 import {AuthService} from "./services/auth.service";
 import {AuthInterceptor} from "./interceptors/auth.interceptor";
+import { UserUpdateComponent } from './user-update/user-update.component';
 
 export function initializeAppFactory(authService: AuthService) {
   return async () => {
@@ -38,7 +39,8 @@ export function initializeAppFactory(authService: AuthService) {
     ChatComponent,
     ChatListComponent,
     PostListComponent,
-    PostCommentsComponent
+    PostCommentsComponent,
+    UserUpdateComponent
   ],
   imports: [
     HttpClientModule,

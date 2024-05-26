@@ -90,7 +90,12 @@ export class AuthService {
         this.http.post<{ access: string; refresh: string }>('/api/v1/auth/token/refresh/', { refresh: refreshToken })
       );
       localStorage.setItem('accessToken', response.access);
-      localStorage.setItem('refreshToken', response.refresh);
+      if (response.refresh) {
+        localStorage.setItem('refreshToken', response.refresh);
+      } else {
+        await this.router.navigate(['/login']);
+        return;
+      }
       // Ensure that getUserFromToken is only called if tokens are successfully refreshed
       await this.getUserFromToken();
       return;
@@ -119,7 +124,7 @@ export class AuthService {
         )
       );
       localStorage.removeItem('accessToken');
-      localStorage.removeItem('refreshToken')
+      localStorage.removeItem('refreshToken');
       this.user = undefined;
       await this.router.navigate(['/login'])
     } catch (error) {
@@ -132,15 +137,19 @@ export class AuthService {
   async signUpUser(data: UserSignUp) {
     try {
       let response = await lastValueFrom(this.http.post<UserSignUp>(
-        '/api/v1/auth/signup/', data)
+        '/api/v1/auth/sign-up/', data)
       );
+      this.snackBar.open('You have been successfully signed up. Now login with your credentials.', 'Close',
+        {horizontalPosition: 'end', verticalPosition: 'top'});
+      await this.router.navigate(['/login']);
+      return;
     } catch(error: any) {
       if (error instanceof HttpErrorResponse) {
         if (error.status === 400) {
           debugger;
-          this.snackBar.open("User with this email already exists.", "Close", {
-            horizontalPosition: "end",
-            verticalPosition: "top"
+          this.snackBar.open('User with this email already exists.', 'Close', {
+            horizontalPosition: 'end',
+            verticalPosition: 'top'
           });
         }
       }
@@ -168,7 +177,7 @@ export interface UserResponse {
 }
 
 export interface User {
-  id: string
+  id: number
   firstName: string
   lastName: string
   username: string
@@ -180,9 +189,9 @@ export interface Login {
   refresh: string;
 }
 
-export interface UserSignUp extends UserResponse{
-  first_name: string
-  last_name: string
-  email: string
-  username: string
+export interface UserSignUp{
+  first_name: any
+  last_name: any
+  username: any
+  password: any
 }

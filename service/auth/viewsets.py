@@ -29,6 +29,7 @@ class UserModelViewSet(ModelViewSet):
         serializer: serializers.ModelSerializer = self.get_serializer(data=request.data)
         if not serializer.is_valid():
             return Response(data=serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        serializer.save()
         return Response(serializer.data, status=status.HTTP_200_OK)
 
     @action(methods=["GET"], detail=False, url_path="user-info")

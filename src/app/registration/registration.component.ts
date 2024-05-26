@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {AuthService} from "../services/auth.service";
 
 @Component({
   selector: 'app-registration',
@@ -9,7 +10,7 @@ import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 export class RegistrationComponent {
   registrationForm: FormGroup;
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder, private authService: AuthService) {
     this.registrationForm = this.fb.group({
       firstName: ['', Validators.required],
       lastName: ['', Validators.required],
@@ -32,14 +33,14 @@ export class RegistrationComponent {
     }
   }
 
-  createAccount() {
+  async createAccount() {
     let loginData = {
       last_name: this.registrationForm.controls['lastName'].value,
       first_name: this.registrationForm.controls['firstName'].value,
       username: this.registrationForm.controls['username'].value,
       password: this.registrationForm.controls['password'].value
     };
-    console.log(loginData);
+    await this.authService.signUpUser(loginData);
   }
 
 }
