@@ -28,25 +28,25 @@
         </mat-form-field>
 
         <mat-form-field appearance="fill">
-          <mat-label>Photo</mat-label>
-          <div class="fileUploadContainer" [ngStyle]="{'margin-top' : updateForm.get('photo')!.value ? '5px' :  '20px'}">
-            <ng-container *ngIf="updateForm.get('photo')!.value">
-              <img [src]="updateForm.get('photo')!.value" />
-              <button class="deleteButton" mat-icon-button (click)="fileInput.value = ''; updateForm.get('photo')?.setValue(null);">
+          <mat-label>Photo</mat-label>і
+          <div class="fileUploadContainer" [ngStyle]="{'margin-top' : updateForm.get('image')!.value ? '5px' :  '20px'}">
+            <ng-container *ngIf="updateForm.get('image')!.value">
+              <img [src]="updateForm.get('image')!.value" />
+              <button class="deleteButton" mat-icon-button (click)="fileInput.value = ''; updateForm.get('image')?.setValue(null);">
                 <mat-icon>close</mat-icon>
               </button>
             </ng-container>
             <!-- no image -->
-            <div *ngIf="!updateForm.get('photo')!.value" fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="10px">
+            <div *ngIf="!updateForm.get('image')!.value" fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="10px">
               <mat-icon style="opacity: 60%;">file_upload</mat-icon>
-              <button mat-raised-button color="primary" style="width:100%; opacity: 80%;">Browser</button>
+              <button type="button" mat-raised-button color="primary" style="width:100%; opacity: 80%;">Browser</button>
               <small style="margin: 20px">Drag and drop here</small>
             </div>
             <!-- put on top of the fileUploadContainer with opacity 0 -->
             <input #fileInput class="fileInput" type="file" multiple="multiple" accept="image/*"
                    (change)="setFileData($event)" />
           </div>
-          <input matInput formControlName="photo" readonly [hidden]="true " />
+          <input matInput formControlName="image" readonly [hidden]="true " />
         </mat-form-field>
 
 <!--        <div class="image-upload">-->

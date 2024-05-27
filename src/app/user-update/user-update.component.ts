@@ -13,9 +13,9 @@ export class UserUpdateComponent implements OnInit{
 
   constructor(private fb: FormBuilder, private authService: AuthService) {
     this.updateForm = this.fb.group({
-      firstName: ['', Validators.required],
-      lastName: ['', Validators.required],
-      email: ['', [Validators.required, Validators.email]],
+      firstName: [this.authService.user?.firstName, Validators.required],
+      lastName: [this.authService.user?.lastName, Validators.required],
+      email: [this.authService.user?.email, [Validators.required, Validators.email]],
       image: []
     });
   }
@@ -25,7 +25,7 @@ export class UserUpdateComponent implements OnInit{
       firstName: this.authService.user?.firstName,
       lastName: this.authService.user?.lastName,
       email: this.authService.user?.email,
-      // image: null
+      image: null
     });
 
     // if (userInfo.profilePicture) {
@@ -70,7 +70,7 @@ export class UserUpdateComponent implements OnInit{
       lastName: this.updateForm.controls['lastName'].value,
       firstName: this.updateForm.controls['firstName'].value,
       email: this.updateForm.controls['email'].value,
-      profilePicture: this.updateForm.controls['profilePicture'].value
+      profilePicture: this.updateForm.controls['image'].value
     };
 
     console.log(userInfo);
