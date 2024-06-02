@@ -1,3 +1,5 @@
+from typing import Any
+
 from django.contrib.auth.models import User
 from rest_framework.serializers import ModelSerializer
 
@@ -21,4 +23,10 @@ class SignUpSerializer(ModelSerializer):
 class UserInfoSerializer(ModelSerializer):
     class Meta:
         model = User
-        exclude = ("password",)
+        fields = ("last_name", "first_name", "email", "username", "image",)
+
+    def update(self, instance: User, validated_data: dict[str, Any]):
+        for field, value in validated_data:
+            setattr(instance, field, value)
+        instance.save()
+        return instance

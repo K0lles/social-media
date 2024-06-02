@@ -27,20 +27,17 @@
           <mat-error *ngIf="updateForm.controls['email']?.hasError('email')">Invalid email format</mat-error>
         </mat-form-field>
 
-        <mat-form-field appearance="fill">
-          <mat-label>Photo</mat-label>і
+        <mat-form-field appearance="fill" style="width: 100%;">
+          <mat-label>Photo</mat-label>
           <div class="fileUploadContainer" [ngStyle]="{'margin-top' : updateForm.get('image')!.value ? '5px' :  '20px'}">
             <ng-container *ngIf="updateForm.get('image')!.value">
-              <img [src]="updateForm.get('image')!.value" />
+              <img [src]="updateForm.get('image')!.value" style="width: 250px; height: 250px;" />
               <button class="deleteButton" mat-icon-button (click)="fileInput.value = ''; updateForm.get('image')?.setValue(null);">
                 <mat-icon>close</mat-icon>
               </button>
             </ng-container>
             <!-- no image -->
             <div *ngIf="!updateForm.get('image')!.value" fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="10px">
-              <mat-icon style="opacity: 60%;">file_upload</mat-icon>
-              <button type="button" mat-raised-button color="primary" style="width:100%; opacity: 80%;">Browser</button>
-              <small style="margin: 20px">Drag and drop here</small>
             </div>
             <!-- put on top of the fileUploadContainer with opacity 0 -->
             <input #fileInput class="fileInput" type="file" multiple="multiple" accept="image/*"

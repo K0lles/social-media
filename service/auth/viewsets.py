@@ -14,6 +14,7 @@ class UserModelViewSet(ModelViewSet):
     serializer_classes: dict[str, serializers.ModelSerializer] = {
         "sign_up": serializers.SignUpSerializer,
         "user_info": serializers.UserInfoSerializer,
+        "user_update": serializers.UserInfoSerializer,
     }
 
     def get_serializer_class(self) -> serializers.ModelSerializer:
@@ -50,3 +51,10 @@ class UserModelViewSet(ModelViewSet):
         token = RefreshToken(request.data.get("refresh_token"))
         token.blacklist()
         return Response(status=status.HTTP_205_RESET_CONTENT)
+
+    @action(methods=["PUT"], detail=False, url_path="user-update")
+    def user_update(self, request: Request, *args, **kwargs):
+        serializer = self.get_serializer(data=request.data, instance=request.user)
+        if serializer.is_valid():
+            serializer.save()
+        return Response(data=serializer.validated_data, status=status.HTTP_200_OK)
