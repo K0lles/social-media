@@ -1,6 +1,6 @@
 from typing import Any
 
-from django.contrib.auth.models import User
+from service.auth_users.models import User
 from rest_framework.serializers import ModelSerializer
 
 

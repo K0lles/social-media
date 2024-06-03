@@ -1,4 +1,4 @@
-from django.contrib.auth.models import User
+from service.auth_users.models import User
 from django.db.models import (
     DO_NOTHING,
     BooleanField,
@@ -7,7 +7,8 @@ from django.db.models import (
     ForeignKey,
     ManyToManyField,
     Model,
-    TextField, CASCADE,
+    TextField,
+    CASCADE,
 )
 
 
@@ -26,5 +27,6 @@ class ChatUser(Model):
 class Message(Model):
     sender = ForeignKey(User, on_delete=DO_NOTHING, related_name="sender")
     receiver = ForeignKey(User, on_delete=DO_NOTHING, related_name="receiver")
+    chat = ForeignKey(Chat, on_delete=DO_NOTHING, related_name="chat")
     text = TextField()
     created_at = DateTimeField(auto_now_add=True)
