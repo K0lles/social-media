@@ -11,6 +11,7 @@ djangorestframework-simplejwt = "==5.3.1"
 psycopg2-binary = "==2.9.9"
 django-cors-headers = "*"
 pillow = "*"
+drf-extra-fields = "*"
 
 [dev-packages]
 

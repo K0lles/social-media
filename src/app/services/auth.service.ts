@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {HttpClient, HttpErrorResponse, HttpHeaders} from "@angular/common/http";
+import {HttpClient, HttpErrorResponse, HttpHeaders, HttpResponse} from "@angular/common/http";
 import {catchError, lastValueFrom} from "rxjs";
 import {Router} from "@angular/router";
 import {MatSnackBar} from "@angular/material/snack-bar";
@@ -69,7 +69,8 @@ export class AuthService {
         lastName: response.last_name,
         firstName: response.first_name,
         email: response.email,
-        username: response.username
+        username: response.username,
+        image: response.image.replace("http://localhost:4200", "http://localhost:8000")
       };
 
     } catch (error) {
@@ -146,7 +147,6 @@ export class AuthService {
     } catch(error: any) {
       if (error instanceof HttpErrorResponse) {
         if (error.status === 400) {
-          debugger;
           this.snackBar.open('User with this email already exists.', 'Close', {
             horizontalPosition: 'end',
             verticalPosition: 'top'
@@ -165,6 +165,25 @@ export class AuthService {
       await this.getUserFromToken();
     }
   }
+
+  async updateUser(formData: {last_name: string, first_name: string, email: string, image: string}) {
+    this.http.put<HttpResponse<any>>('api/v1/auth/user-update/', formData, {
+        headers: new HttpHeaders({
+          'Authorization': `Bearer ${localStorage.getItem('accessToken')}`
+        })
+      }
+    ).subscribe(async (response) => {
+      if (response.status == 200) {
+        this.snackBar.open('Data was changed.', 'Close',
+          {horizontalPosition: 'end', verticalPosition: 'top'});
+        await this.getUserFromToken();
+      }
+      else {
+        this.snackBar.open('Something went wrong.', 'Close',
+          {horizontalPosition: 'end', verticalPosition: 'top'});
+      }
+    })
+  }
 }
 
 
@@ -174,6 +193,7 @@ export interface UserResponse {
   last_name: string
   email: string
   username: string
+  image: string
 }
 
 export interface User {
@@ -182,6 +202,7 @@ export interface User {
   lastName: string
   username: string
   email: string
+  image: string
 }
 
 export interface Login {

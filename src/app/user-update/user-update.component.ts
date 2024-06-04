@@ -67,14 +67,14 @@ export class UserUpdateComponent implements OnInit{
 
   async updateUserInfo() {
     const userInfo = {
-      lastName: this.updateForm.controls['lastName'].value,
-      firstName: this.updateForm.controls['firstName'].value,
+      last_name: this.updateForm.controls['lastName'].value,
+      first_name: this.updateForm.controls['firstName'].value,
       email: this.updateForm.controls['email'].value,
-      profilePicture: this.updateForm.controls['image'].value
+      image: this.updateForm.controls['image'].value
     };
 
     console.log(userInfo);
-    // await this.authService.updateUser(userInfo);
+    await this.authService.updateUser(userInfo);
   }
 
 }

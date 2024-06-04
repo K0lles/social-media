@@ -7,6 +7,7 @@ from rest_framework.viewsets import ModelViewSet
 from rest_framework_simplejwt.tokens import RefreshToken
 
 from . import serializers
+from .serializers import UserInfoDisplay
 
 
 class UserModelViewSet(ModelViewSet):
@@ -57,4 +58,5 @@ class UserModelViewSet(ModelViewSet):
         serializer = self.get_serializer(data=request.data, instance=request.user)
         if serializer.is_valid():
             serializer.save()
-        return Response(data=serializer.validated_data, status=status.HTTP_200_OK)
+        representation_serializer = UserInfoDisplay(instance=User.objects.get(id=self.request.user.id))
+        return Response(data=representation_serializer.data, status=status.HTTP_200_OK)
