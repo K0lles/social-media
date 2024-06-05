@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     "rest_framework_simplejwt.token_blacklist",
     "service.auth_users",
     "drf_extra_fields",
+    "service.post",
 ]
 
 MIDDLEWARE = [
