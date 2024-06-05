@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {PostsService} from "../services/posts.service";
 
 @Component({
   selector: 'app-post-create',
@@ -10,7 +11,7 @@ export class PostCreateComponent {
   postForm: FormGroup;
   imagePreview: string | ArrayBuffer | null = null;
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder, private postsService: PostsService) {
     this.postForm = this.fb.group({
       postText: ['', Validators.required],
       image: [null]
@@ -37,13 +38,14 @@ export class PostCreateComponent {
     this.postForm.patchValue({ image: null });
   }
 
-  addPost(): void {
+  async addPost() {
     const postData = {
-      postText: this.postForm.controls['postText'].value,
+      text: this.postForm.controls['postText'].value,
       image: this.imagePreview
     };
 
     console.log(postData);
+    await this.postsService.createPost(postData);
     // Add your post submission logic here
   }
 }

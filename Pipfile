@@ -20,4 +20,4 @@ python_version = "3.11"
 
 [scripts]
 shell = "python manage.py shell"
-server = "python manage.py runserver"
+dev-server = "python manage.py runserver"
