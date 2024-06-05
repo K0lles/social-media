@@ -70,7 +70,7 @@ export class AuthService {
         firstName: response.first_name,
         email: response.email,
         username: response.username,
-        image: response.image.replace("http://localhost:4200", "http://localhost:8000")
+        image: response.image ? response.image.replace("http://localhost:4200", "http://localhost:8000") : ""
       };
 
     } catch (error) {
@@ -199,8 +199,8 @@ export interface User {
   firstName: string
   lastName: string
   username: string
-  email: string
-  image: string
+  email: string | null
+  image: string | null
 }
 
 export interface Login {
