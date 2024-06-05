@@ -23,6 +23,7 @@ import { MatSnackBarModule } from "@angular/material/snack-bar";
 import {AuthService} from "./services/auth.service";
 import {AuthInterceptor} from "./interceptors/auth.interceptor";
 import { UserUpdateComponent } from './user-update/user-update.component';
+import { PostCreateComponent } from './post-create/post-create.component';
 
 export function initializeAppFactory(authService: AuthService) {
   return async () => {
@@ -40,7 +41,8 @@ export function initializeAppFactory(authService: AuthService) {
     ChatListComponent,
     PostListComponent,
     PostCommentsComponent,
-    UserUpdateComponent
+    UserUpdateComponent,
+    PostCreateComponent
   ],
   imports: [
     HttpClientModule,

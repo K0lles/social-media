@@ -1,0 +1,39 @@
+<div class="main">
+  <mat-card class="add-post-card">
+
+    <mat-card-header>
+      <mat-card-title>Add New Post</mat-card-title>
+    </mat-card-header>
+
+    <mat-card-content>
+      <form class="add-post-form" [formGroup]="postForm" (ngSubmit)="addPost()">
+
+        <mat-form-field class="full-width" appearance="fill">
+          <mat-label>Post Text</mat-label>
+          <textarea matInput name="postText" [formControlName]="'postText'" required></textarea>
+          <mat-error *ngIf="postForm.controls['postText']?.hasError('required')">Post text is required</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill" class="full-width">
+          <mat-label>Photo</mat-label>
+          <div class="fileUploadContainer" [ngStyle]="{'margin-top': postForm.get('image')!.value ? '5px' : '20px'}">
+            <ng-container *ngIf="postForm.get('image')!.value">
+              <img [src]="postForm.get('image')!.value" class="preview-image" />
+              <button mat-icon-button class="deleteButton" (click)="clearImage()">
+                <mat-icon>close</mat-icon>
+              </button>
+            </ng-container>
+            <div *ngIf="!postForm.get('image')!.value" class="upload-placeholder">
+              <mat-icon>add_photo_alternate</mat-icon>
+              <span>Upload Photo</span>
+            </div>
+            <input #fileInput class="fileInput" type="file" accept="image/*" (change)="onFileSelected($event)" />
+          </div>
+          <input matInput formControlName="image" readonly [hidden]="true" />
+        </mat-form-field>
+
+        <button mat-raised-button color="primary" type="submit" [disabled]="postForm.invalid">Post</button>
+      </form>
+    </mat-card-content>
+  </mat-card>
+</div>
