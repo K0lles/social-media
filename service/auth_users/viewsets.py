@@ -58,5 +58,7 @@ class UserModelViewSet(ModelViewSet):
         serializer = self.get_serializer(data=request.data, instance=request.user)
         if serializer.is_valid():
             serializer.save()
-        representation_serializer = UserInfoDisplay(instance=User.objects.get(id=self.request.user.id))
-        return Response(data=representation_serializer.data, status=status.HTTP_200_OK)
+            representation_serializer = UserInfoDisplay(instance=User.objects.get(id=self.request.user.id))
+            return Response(data=representation_serializer.data, status=status.HTTP_200_OK)
+        else:
+            return Response(data={"error": "Something went wrong."}, status=status.HTTP_400_BAD_REQUEST)

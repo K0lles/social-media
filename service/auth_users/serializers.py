@@ -25,7 +25,7 @@ class SignUpSerializer(ModelSerializer):
 
 
 class UserInfoSerializer(ModelSerializer):
-    image = Base64ImageField()
+    image = Base64ImageField(required=False, allow_null=True)
 
     class Meta:
         model = User
@@ -33,7 +33,9 @@ class UserInfoSerializer(ModelSerializer):
 
     def update(self, instance: User, validated_data: dict[str, Any]):
         for field, value in validated_data.items():
-            setattr(instance, field, value)
+            breakpoint()
+            if value:
+                setattr(instance, field, value)
         instance.save()
         return instance
 

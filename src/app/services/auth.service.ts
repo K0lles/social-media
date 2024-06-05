@@ -167,22 +167,20 @@ export class AuthService {
   }
 
   async updateUser(formData: {last_name: string, first_name: string, email: string, image: string}) {
-    this.http.put<HttpResponse<any>>('api/v1/auth/user-update/', formData, {
+    this.http.put('api/v1/auth/user-update/', formData, {
         headers: new HttpHeaders({
           'Authorization': `Bearer ${localStorage.getItem('accessToken')}`
         })
       }
-    ).subscribe(async (response) => {
-      if (response.status == 200) {
-        this.snackBar.open('Data was changed.', 'Close',
-          {horizontalPosition: 'end', verticalPosition: 'top'});
-        await this.getUserFromToken();
-      }
-      else {
+    ).subscribe(async (response: any) => {
+      this.snackBar.open('Data was changed.', 'Close',
+        {horizontalPosition: 'end', verticalPosition: 'top'});
+      await this.getUserFromToken();
+    },
+      (error) => {
         this.snackBar.open('Something went wrong.', 'Close',
           {horizontalPosition: 'end', verticalPosition: 'top'});
-      }
-    })
+      })
   }
 }
 
