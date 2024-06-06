@@ -11,7 +11,7 @@ export class PostsService {
   constructor(private http: HttpClient, private router: Router, private snackBar: MatSnackBar) { }
 
   async createPost(postData: {text: string, image: string | ArrayBuffer | null}) {
-    this.http.post<any>("api/v1/posts/", postData).subscribe(
+    this.http.post<any>("api/v1/posts/add/", postData).subscribe(
       (data) => {
         this.snackBar.open('Post was successfully created.', 'Close',
           {horizontalPosition: 'end', verticalPosition: 'top'});
