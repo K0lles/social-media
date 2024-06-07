@@ -8,12 +8,13 @@ from rest_framework.serializers import BaseSerializer
 from rest_framework.viewsets import ModelViewSet
 
 from service.post.models import Post
-from service.post.serializers import PostCreateSerializer
+from service.post.serializers import PostCreateSerializer, MyPostSerializer
 
 
 class PostViewSet(ModelViewSet):
     serializer_classes: ClassVar[dict[str, BaseSerializer]] = {
         "add": PostCreateSerializer,
+        "my_posts": MyPostSerializer,
     }
 
     def get_serializer_class(self) -> BaseSerializer:
@@ -29,3 +30,10 @@ class PostViewSet(ModelViewSet):
             serializer.save()
             return Response(status=status.HTTP_200_OK)
         return Response(data={"error": "Something went wrong."}, status=status.HTTP_400_BAD_REQUEST)
+
+    @action(methods=["GET"], detail=False, url_path="my-posts", url_name="my_posts")
+    def my_posts(self, request, *args, **kwargs):
+        posts = Post.objects.filter(owner_id=self.request.user.id)
+        serializer = self.get_serializer(posts, many=True)
+        return Response(data=serializer.data, status=status.HTTP_200_OK)
+

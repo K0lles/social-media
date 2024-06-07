@@ -1,0 +1,83 @@
+@import "../../styles.scss";
+
+.post-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.post {
+  width: 66%;
+  background-color: $Dark-Grey;
+  border-radius: 10px;
+  margin: 20px;
+  padding: 15px;
+  color: $White;
+  font-family: 'Inter', sans-serif;
+
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    .author-info {
+      display: flex;
+      align-items: center;
+
+      .thumbnail {
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        background-color: $Grey;
+        margin-right: 10px;
+      }
+
+      .username {
+        color: $White;
+        font-weight: 600;
+      }
+    }
+
+    .burger-menu {
+      width: 30px;
+      height: 30px;
+      display: flex;
+      align-items: center;
+      border-radius: 5px;
+      position: relative;
+    }
+  }
+
+  .main {
+    margin-top: 15px;
+
+    .photo {
+      width: 100%;
+      height: 300px;
+      background-color: $Grey;
+      margin-bottom: 10px;
+    }
+
+    .text {
+      color: $White;
+      font-size: 13px;
+      line-height: 1.5;
+    }
+  }
+
+  .comments {
+    margin-top: 20px;
+    color: $White;
+    font-size: 14px;
+    cursor: pointer;
+    background-color: $Grey;
+  }
+}
+
+// For burger-menu items background
+::ng-deep .mat-mdc-menu-panel {
+  background-color: $Grey !important;
+  --mat-menu-container-shape: 0 !important;
+  border-radius: 5px !important;
+  padding: 0 10px;
+}

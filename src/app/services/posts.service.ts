@@ -18,4 +18,12 @@ export class PostsService {
       }
     )
   }
+
+  async getMyPosts() {
+    let posts = this.http.get("api/v1/posts/my-posts/").subscribe(
+      (response) => {
+        debugger;
+    }
+    );
+  }
 }

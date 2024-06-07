@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {PostsService} from "../services/posts.service";
+import {ActivatedRoute, Router} from "@angular/router";
 
 @Component({
   selector: 'app-post-create',
@@ -11,7 +12,7 @@ export class PostCreateComponent {
   postForm: FormGroup;
   imagePreview: string | ArrayBuffer | null = null;
 
-  constructor(private fb: FormBuilder, private postsService: PostsService) {
+  constructor(private fb: FormBuilder, private postsService: PostsService, private router: Router) {
     this.postForm = this.fb.group({
       postText: ['', Validators.required],
       image: [null]
@@ -44,8 +45,7 @@ export class PostCreateComponent {
       image: this.imagePreview
     };
 
-    console.log(postData);
     await this.postsService.createPost(postData);
-    // Add your post submission logic here
+    return this.router.navigate(['posts/my'])
   }
 }

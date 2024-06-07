@@ -9,6 +9,7 @@ import {authGuard} from "./guards/auth.guard";
 import {alreadyAuthedGuard} from "./guards/already-authed.guard";
 import {UserUpdateComponent} from "./user-update/user-update.component";
 import {PostCreateComponent} from "./post-create/post-create.component";
+import {MyPostsComponent} from "./my-posts/my-posts.component";
 
 const routes: Routes = [
   { path: "", component: PostListComponent, canActivate: [authGuard] },
@@ -17,7 +18,8 @@ const routes: Routes = [
   { path: "user/update", component: UserUpdateComponent, canActivate: [authGuard] },
   { path: "comments/:postId", component: PostCommentsComponent, canActivate: [authGuard] },
   { path: "messages", component: ChatListComponent, canActivate: [authGuard] },
-  { path: "post/add", component: PostCreateComponent, canActivate: [authGuard] }
+  { path: "post/add", component: PostCreateComponent, canActivate: [authGuard] },
+  { path: "posts/my", component: MyPostsComponent, canActivate: [authGuard]},
 ];
 
 @NgModule({

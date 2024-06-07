@@ -18,3 +18,10 @@ class PostCreateSerializer(ModelSerializer):
         )
         post.save()
         return post
+
+
+class MyPostSerializer(ModelSerializer):
+
+    class Meta:
+        model = Post
+        fields = ("image", "text", "created_at",)
