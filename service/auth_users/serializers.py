@@ -16,9 +16,7 @@ class SignUpSerializer(ModelSerializer):
 
     def create(self, validated_data: dict) -> User:
         password = validated_data.pop("password")
-        user = User(
-            **validated_data
-        )
+        user = User(**validated_data)
         user.set_password(password)
         user.save()
         return user
@@ -29,7 +27,14 @@ class UserInfoSerializer(ModelSerializer):
 
     class Meta:
         model = User
-        fields = ("id", "last_name", "username", "first_name", "email", "image",)
+        fields = (
+            "id",
+            "last_name",
+            "username",
+            "first_name",
+            "email",
+            "image",
+        )
         extra_kwargs = {"username": {"read_only": True}, "id": {"read_only": True}}
 
     def update(self, instance: User, validated_data: dict[str, Any]):
@@ -51,4 +56,9 @@ class UserInfoDisplay(ModelSerializer):
 
     class Meta:
         model = User
-        fields = ("last_name", "first_name", "email", "image",)
+        fields = (
+            "last_name",
+            "first_name",
+            "email",
+            "image",
+        )

@@ -45,10 +45,14 @@ class UserModelViewSet(ModelViewSet):
     def logout(self, request: Request, *args, **kwargs):
         if not self.request.user:
             return Response(
-                data={"detail": "You are not logged in."}, status=status.HTTP_401_UNAUTHORIZED
+                data={"detail": "You are not logged in."},
+                status=status.HTTP_401_UNAUTHORIZED,
             )
         if not request.data.get("refresh_token"):
-            return Response(data={"detail": "Refresh token was not provided."}, status=status.HTTP_400_BAD_REQUEST)
+            return Response(
+                data={"detail": "Refresh token was not provided."},
+                status=status.HTTP_400_BAD_REQUEST,
+            )
         token = RefreshToken(request.data.get("refresh_token"))
         token.blacklist()
         return Response(status=status.HTTP_205_RESET_CONTENT)
@@ -58,7 +62,14 @@ class UserModelViewSet(ModelViewSet):
         serializer = self.get_serializer(data=request.data, instance=request.user)
         if serializer.is_valid():
             serializer.save()
-            representation_serializer = UserInfoDisplay(instance=User.objects.get(id=self.request.user.id))
-            return Response(data=representation_serializer.data, status=status.HTTP_200_OK)
+            representation_serializer = UserInfoDisplay(
+                instance=User.objects.get(id=self.request.user.id)
+            )
+            return Response(
+                data=representation_serializer.data, status=status.HTTP_200_OK
+            )
         else:
-            return Response(data={"error": "Something went wrong."}, status=status.HTTP_400_BAD_REQUEST)
+            return Response(
+                data={"error": "Something went wrong."},
+                status=status.HTTP_400_BAD_REQUEST,
+            )

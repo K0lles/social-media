@@ -4,6 +4,13 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+
+  .title {
+    font-size: 24px;
+    font-weight: 700;
+    color: $White;
+    margin-bottom: 20px;
+  }
 }
 
 .post {
@@ -38,13 +45,20 @@
       }
     }
 
-    .burger-menu {
-      width: 30px;
-      height: 30px;
+    .post-meta {
       display: flex;
       align-items: center;
-      border-radius: 5px;
-      position: relative;
+
+      .created-at {
+        color: $Grey;
+        margin-right: 15px;
+      }
+
+      .burger-menu {
+        button {
+          color: $White;
+        }
+      }
     }
   }
 
@@ -74,8 +88,8 @@
   }
 }
 
-// For burger-menu items background
-::ng-deep .mat-mdc-menu-panel {
+// for kebab-menu items background
+::ng-deep.mat-mdc-menu-panel {
   background-color: $Grey !important;
   --mat-menu-container-shape: 0 !important;
   border-radius: 5px !important;

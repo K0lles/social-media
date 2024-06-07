@@ -20,8 +20,8 @@ export class PostsService {
   }
 
   async getMyPosts() {
-    let posts: {id: number, image: string, text: string, created_at: string}[] = [];
-    this.http.get<{id: number, image: string, text: string, created_at: string}[]>("api/v1/posts/my-posts/").subscribe(
+    let posts: {id: number, image: string, text: string, created_at: string, comments_amount: number}[] = [];
+    this.http.get<{id: number, image: string, text: string, created_at: string, comments_amount: number}[]>("api/v1/posts/my-posts/").subscribe(
       (response) => {
         for (let i = 0; i < response.length; i++) {
           posts.push(response[i]);
