@@ -24,4 +24,4 @@ class MyPostSerializer(ModelSerializer):
 
     class Meta:
         model = Post
-        fields = ("image", "text", "created_at",)
+        fields = ("id", "image", "text", "created_at",)

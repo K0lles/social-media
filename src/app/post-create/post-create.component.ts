@@ -46,6 +46,6 @@ export class PostCreateComponent {
     };
 
     await this.postsService.createPost(postData);
-    return this.router.navigate(['posts/my'])
+    return await this.router.navigate(['posts/my']);
   }
 }

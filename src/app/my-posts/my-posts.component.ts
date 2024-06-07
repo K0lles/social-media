@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {PostsService} from "../services/posts.service";
+import {AuthService, User} from "../services/auth.service";
 
 @Component({
   selector: 'app-my-posts',
@@ -7,29 +8,14 @@ import {PostsService} from "../services/posts.service";
   styleUrls: ['./my-posts.component.scss']
 })
 export class MyPostsComponent implements OnInit {
-  myPosts = [
-    {
-      id: 1,
-      userLogo: 'path_to_user_logo.jpg',
-      username: 'UserName',
-      image: 'path_to_post_image.jpg',
-      text: 'This is the first post',
-      commentsAmount: 5
-    }
-    // {
-    //   id: 2,
-    //   userLogo: 'path_to_user_logo.jpg',
-    //   username: 'UserName',
-    //   image: 'path_to_post_image.jpg',
-    //   text: 'This is the second post',
-    //   commentsAmount: 3
-    // }
-  ];
+  myPosts: {id: number, image: string, text: string, created_at: string}[] = [];
+  user: User | undefined;
 
-  constructor(private postsService: PostsService) {}
+  constructor(private postsService: PostsService, private authService: AuthService) {}
 
   async ngOnInit() {
-    let myPosts = await this.postsService.getMyPosts();
+    this.user = this.authService.user;
+    this.myPosts = await this.postsService.getMyPosts();
   }
 
   editPost(postId: number): void {
