@@ -38,6 +38,22 @@
       }
     }
 
+    .post-meta {
+      display: flex;
+      align-items: center;
+
+      .created-at {
+        color: $Grey;
+        margin-right: 15px;
+      }
+
+      .burger-menu {
+        button {
+          color: $White;
+        }
+      }
+    }
+
     .kebab-menu {
       width: 30px;
       height: 30px;

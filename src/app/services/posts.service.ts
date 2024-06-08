@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {Router} from "@angular/router";
 import {MatSnackBar} from "@angular/material/snack-bar";
+import {Observable} from "rxjs";
 
 @Injectable({
   providedIn: 'root'
@@ -30,4 +31,24 @@ export class PostsService {
     );
     return posts;
   }
+
+  getPostById(id: number | string) {
+    return this.http.get<PostDetail>(`api/v1/posts/${id}/post-detail/`);
+  }
+
+  addComment(commentData: {text: string, post_id: number | string}): Observable<any> {
+    return this.http.post("api/v1/posts/comments/add-comment/", commentData);
+  }
+}
+
+
+export interface PostDetail {
+  id: number
+  text: string
+  image: string
+  owner_username: string
+  owner_image: string
+  owner_id: number
+  created_at: string
+  comments: {text: string, username: string, user_image: string, post_id: number, created_at: string}[]
 }

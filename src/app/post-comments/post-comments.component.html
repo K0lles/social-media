@@ -1,35 +1,50 @@
-<div class="post-container">
+<div class="post-container" *ngIf="this.post">
   <div class="post">
     <div class="header">
       <div class="author-info">
-        <img src="{{ post.userLogo }}" class="thumbnail">
-        <div class="username">{{ post.username }}</div>
+        <img src="{{ post?.owner_image ? post?.owner_image : 'assets/images/empty-user.jpg' }}" class="thumbnail">
+        <div class="username">{{ post?.owner_username }}</div>
       </div>
-      <div class="burger-menu">
-        <button mat-icon-button [matMenuTriggerFor]="menu">
-          <mat-icon>more_vert</mat-icon>
-        </button>
-        <mat-menu #menu="matMenu">
-          <button mat-menu-item>Зберегти</button>
-          <button mat-menu-item>Опція 2</button>
-          <button mat-menu-item>Опція 3</button>
-        </mat-menu>
+      <div class="post-meta">
+        <div class="created-at">{{ post?.created_at | date: 'short' }}</div>
+        <div class="burger-menu">
+          <button mat-icon-button [matMenuTriggerFor]="menu">
+            <mat-icon>more_vert</mat-icon>
+          </button>
+          <mat-menu #menu="matMenu">
+            <button mat-menu-item>Save</button>
+            <ng-container *ngIf="this.user?.id == post.owner_id">
+              <button mat-menu-item>Delete</button>
+            </ng-container>
+          </mat-menu>
+        </div>
       </div>
     </div>
     <div class="main">
-      <img src="{{ post.image }}" class="photo"/>
-      <div class="text">{{ post.text }}</div>
+      <img *ngIf="post?.image" src="{{ post?.image}}" class="photo"/>
+      <div class="text">{{ post?.text }}</div>
     </div>
   </div>
   <div class="comments-container">
-    <div class="comment" *ngFor="let comment of comments">
+    <div class="comment" *ngFor="let comment of this.post.comments">
       <div class="comment-header">
-        <img src="{{ comment.userImage }}" class="thumbnail">
+        <img src="{{ comment.user_image }}" class="thumbnail">
       </div>
       <div class="comment-body">
         <div class="username">{{comment.username}}</div>
         <div class="comment-text">{{comment.text}}</div>
       </div>
+      <div class="spacer"></div>
+      <div class="comment-created-at">
+        <div class="created-at-label">{{ comment.created_at | date: 'short'}}</div>
+      </div>
     </div>
   </div>
+  <form [formGroup]="commentForm" class="add-comment" (ngSubmit)="addComment()">
+    <mat-form-field class="comment-input">
+      <input matInput placeholder="Add a comment..." formControlName="comment" />
+<!--      <mat-error *ngIf="commentForm.get('comment')?.invalid">Comment is required</mat-error>-->
+    </mat-form-field>
+    <button mat-raised-button color="primary" type="submit" [disabled]="commentForm.invalid">Comment</button>
+  </form>
 </div>

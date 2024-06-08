@@ -44,4 +44,38 @@
       margin-top: 5px;
     }
   }
+
+  .comment-created-at {
+    justify-content: end;
+    position: relative;
+    left: 2%;
+
+    .created-at-label {
+      background-color: rgba(255, 255, 255, 0.2); /* Semi-transparent background */
+      padding: 5px; /* Add padding */
+      border-radius: 5px; /* Add border radius */
+      font-size: 12px; /* Adjust font size */
+      color: $White; /* Text color */
+    }
+  }
+}
+
+.add-comment {
+  display: flex;
+  width: 66%;
+  margin-top: 10px;
+  align-items: center;
+
+  .comment-input {
+    flex-grow: 1;
+    margin-right: 10px;
+  }
+
+  button {
+    white-space: nowrap;
+  }
+}
+
+.spacer {
+  flex-grow: 1; // To push created_at label to the right
 }

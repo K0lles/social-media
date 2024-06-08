@@ -3,7 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import {LoginComponent} from "./login/login.component";
 import {RegistrationComponent} from "./registration/registration.component";
 import {PostListComponent} from "./post-list/post-list.component";
-import {PostCommentsComponent} from "./post-comments/post-comments.component";
+import {PostCommentsComponent, PostCommentsResolver} from "./post-comments/post-comments.component";
 import {ChatListComponent} from "./chat-list/chat-list.component";
 import {authGuard} from "./guards/auth.guard";
 import {alreadyAuthedGuard} from "./guards/already-authed.guard";
@@ -16,9 +16,9 @@ const routes: Routes = [
   { path: "login", component: LoginComponent, canActivate: [alreadyAuthedGuard] },
   { path: "sign-up", component: RegistrationComponent, canActivate: [alreadyAuthedGuard] },
   { path: "user/update", component: UserUpdateComponent, canActivate: [authGuard] },
-  { path: "comments/:postId", component: PostCommentsComponent, canActivate: [authGuard] },
+  { path: "comments/:postId", component: PostCommentsComponent, canActivate: [authGuard], resolve: {post: PostCommentsResolver} },
   { path: "messages", component: ChatListComponent, canActivate: [authGuard] },
-  { path: "post/add", component: PostCreateComponent, canActivate: [authGuard] },
+  { path: "posts/add", component: PostCreateComponent, canActivate: [authGuard] },
   { path: "posts/my", component: MyPostsComponent, canActivate: [authGuard]},
 ];
 

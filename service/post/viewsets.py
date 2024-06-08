@@ -1,5 +1,6 @@
 from typing import ClassVar
 
+from django.core.exceptions import ObjectDoesNotExist
 from django.db.models import Count
 from rest_framework import status
 from rest_framework.decorators import action
@@ -8,8 +9,9 @@ from rest_framework.response import Response
 from rest_framework.serializers import BaseSerializer
 from rest_framework.viewsets import ModelViewSet
 
-from service.post.models import Post, Comment
-from service.post.serializers import PostCreateSerializer, MyPostSerializer
+from service.post.models import Post
+from service.post.serializers import PostCreateSerializer, MyPostSerializer, AddCommentSerializer, \
+    CommentDisplaySerializer, PostDetailSerializer
 from service.viewsets import BaseModelViewSet
 
 
@@ -17,6 +19,7 @@ class PostViewSet(ModelViewSet):
     serializer_classes: ClassVar[dict[str, BaseSerializer]] = {
         "add": PostCreateSerializer,
         "my_posts": MyPostSerializer,
+        "post_detail": PostDetailSerializer,
     }
 
     def get_serializer_class(self) -> BaseSerializer:
@@ -27,9 +30,7 @@ class PostViewSet(ModelViewSet):
 
     @action(methods=["POST"], detail=False, url_path="add", url_name="add")
     def add(self, request: Request, *args, **kwargs):
-        serializer = self.get_serializer(
-            data=request.data, context={"user": self.request.user}
-        )
+        serializer = self.get_serializer(data=request.data, context={"user": self.request.user})
         if serializer.is_valid():
             serializer.save()
             return Response(status=status.HTTP_200_OK)
@@ -47,6 +48,24 @@ class PostViewSet(ModelViewSet):
         serializer = self.get_serializer(posts, many=True)
         return Response(data=serializer.data, status=status.HTTP_200_OK)
 
+    @action(methods=["GET"], detail=True, url_path="post-detail", url_name="post_detail")
+    def post_detail(self, request: Request, pk: int, *args, **kwargs):
+        try:
+            post = Post.objects.filter(id=pk).first()
+        except ObjectDoesNotExist:
+            return Response(data={"error": "Post was not found."}, status=status.HTTP_400_BAD_REQUEST)
+        return Response(data=self.get_serializer(instance=post, context={"request": request}).data, status=status.HTTP_200_OK)
+
 
 class CommentViewSet(BaseModelViewSet):
-    serializer_classes: ClassVar[dict[str, BaseSerializer]] = {}
+    serializer_classes: ClassVar[dict[str, BaseSerializer]] = {
+        "add_comment": AddCommentSerializer,
+    }
+
+    @action(methods=["POST"], detail=False, url_path="add-comment", url_name="add_comment")
+    def add_comment(self, request, *args, **kwargs):
+        serializer: BaseSerializer = self.get_serializer(data=request.data, context={"user": self.request.user})
+        if serializer.is_valid():
+            comment = serializer.save()
+            return Response(data=CommentDisplaySerializer(instance=comment, context={"request": request}).data, status=status.HTTP_200_OK)
+        return Response(data=serializer.errors, status=status.HTTP_400_BAD_REQUEST)

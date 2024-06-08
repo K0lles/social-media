@@ -20,9 +20,10 @@
           <mat-icon>more_vert</mat-icon>
         </button>
         <mat-menu #auth="matMenu">
-          <button mat-menu-item (click)="logout()">Log out</button>
+          <button mat-menu-item routerLink="posts/add">Add post</button>
+          <button mat-menu-item routerLink="posts/my">My posts</button>
           <button mat-menu-item routerLink="user/update">Account settings</button>
-          <button mat-menu-item routerLink="post/add">Add post</button>
+          <button mat-menu-item (click)="logout()">Log out</button>
         </mat-menu>
       </div>
     </ng-container>
