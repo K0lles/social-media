@@ -25,6 +25,8 @@ import {AuthInterceptor} from "./interceptors/auth.interceptor";
 import { UserUpdateComponent } from './user-update/user-update.component';
 import { PostCreateComponent } from './post-create/post-create.component';
 import { MyPostsComponent } from './my-posts/my-posts.component';
+import { UserInfoComponent } from './user-info/user-info.component';
+import { UserSubscribeComponent } from './user-subscribe/user-subscribe.component';
 
 export function initializeAppFactory(authService: AuthService) {
   return async () => {
@@ -44,7 +46,9 @@ export function initializeAppFactory(authService: AuthService) {
     PostCommentsComponent,
     UserUpdateComponent,
     PostCreateComponent,
-    MyPostsComponent
+    MyPostsComponent,
+    UserInfoComponent,
+    UserSubscribeComponent
   ],
   imports: [
     HttpClientModule,

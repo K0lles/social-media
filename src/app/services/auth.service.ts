@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {HttpClient, HttpErrorResponse, HttpHeaders, HttpResponse} from "@angular/common/http";
+import {HttpClient, HttpErrorResponse, HttpHeaders, HttpParams, HttpResponse} from "@angular/common/http";
 import {catchError, lastValueFrom} from "rxjs";
 import {Router} from "@angular/router";
 import {MatSnackBar} from "@angular/material/snack-bar";
@@ -70,7 +70,8 @@ export class AuthService {
         firstName: response.first_name,
         email: response.email,
         username: response.username,
-        image: response.image ? response.image.replace("http://localhost:4200", "http://localhost:8000") : ""
+        image: response.image ? response.image.replace("http://localhost:4200", "http://localhost:8000") : "",
+        subscribers_amount: response.subscribers_amount
       };
 
     } catch (error) {
@@ -182,6 +183,20 @@ export class AuthService {
           {horizontalPosition: 'end', verticalPosition: 'top'});
       })
   }
+
+  getUserInfoById(id: string | number) {
+    return this.http.get<AnotherUserResponse>("api/v1/auth/another-user/",
+      {params: {user_id: id}}
+    )
+  }
+
+  subscribe(id: string | number | undefined) {
+    return this.http.post(`api/v1/auth/${id}/subscribe/`, {})
+  }
+
+  unsubscribe(id: string | number | undefined) {
+    return this.http.post(`api/v1/auth/${id}/unsubscribe/`, {})
+  }
 }
 
 
@@ -192,6 +207,7 @@ export interface UserResponse {
   email: string
   username: string
   image: string
+  subscribers_amount: number | null
 }
 
 export interface User {
@@ -201,6 +217,7 @@ export interface User {
   username: string
   email: string | null
   image: string | null
+  subscribers_amount: number | null
 }
 
 export interface Login {
@@ -213,4 +230,15 @@ export interface UserSignUp{
   last_name: any
   username: any
   password: any
+}
+
+export interface AnotherUserResponse {
+  id: number
+  first_name: string
+  last_name: string
+  email: string
+  username: string
+  image: string
+  subscribers_amount: number | null
+  is_subscribed: boolean
 }

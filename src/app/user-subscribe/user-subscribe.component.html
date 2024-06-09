@@ -1,0 +1,48 @@
+<div class="account-container">
+  <div class="account-info">
+    <div class="profile-picture">
+      <img [src]="user?.image" alt="User Profile Picture">
+    </div>
+    <div class="user-details">
+      <h2>{{ user?.username }}</h2>
+      <p>{{ user?.first_name }} {{ user?.last_name }}</p>
+      <p>Followers: {{ user?.subscribers_amount }}</p>
+      <ng-container *ngIf="user?.id !== myUser?.id">
+        <button mat-raised-button color="warn" (click)="unsubscribe()" *ngIf="user?.is_subscribed; else unsubscribed">Unsubscribe</button>
+        <ng-template #unsubscribed>
+          <button mat-raised-button color="primary" (click)="subscribe()">Subscribe</button>
+        </ng-template>
+      </ng-container>
+    </div>
+  </div>
+
+  <div class="posts-list">
+    <h2 class="title">{{ user?.username }}'s Posts</h2>
+    <div *ngFor="let post of posts" class="post">
+      <div class="header">
+        <div class="author-info">
+          <img [src]="user?.image" class="thumbnail" alt="User Logo">
+          <div class="username">{{ user?.username }}</div>
+        </div>
+        <div class="post-meta">
+          <div class="created-at">{{ post.created_at | date: 'short' }}</div>
+          <div class="burger-menu">
+            <button mat-icon-button [matMenuTriggerFor]="menu">
+              <mat-icon>more_vert</mat-icon>
+            </button>
+            <mat-menu #menu="matMenu">
+              <button mat-menu-item>Save</button>
+              <button mat-menu-item>Option 2</button>
+              <button mat-menu-item>Option 3</button>
+            </mat-menu>
+          </div>
+        </div>
+      </div>
+      <div class="main">
+        <img [src]="post.image" class="photo" alt="Post Image"/>
+        <div class="text">{{ post.text }}</div>
+      </div>
+      <a mat-stroked-button routerLink="/comments/{{ post.id }}" class="comments">{{ post.comments_amount }} comments</a>
+    </div>
+  </div>
+</div>

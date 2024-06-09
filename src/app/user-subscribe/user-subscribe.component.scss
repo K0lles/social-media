@@ -1,0 +1,144 @@
+@import "../../styles.scss";
+
+.account-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: $White;
+}
+
+.account-info {
+  display: flex;
+  align-items: center;
+  background-color: $Dark-Grey;
+  border-radius: 10px;
+  padding: 20px;
+  margin-bottom: 20px;
+  width: 60%;
+  //@include flex-center;
+  flex-direction: row;
+
+  .profile-picture {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    overflow: hidden;
+    margin-right: 20px;
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+
+  .user-details {
+    h2 {
+      font-size: 24px;
+      font-weight: 700;
+      margin-bottom: 10px;
+    }
+
+    p {
+      margin: 5px 0;
+      font-size: 16px;
+    }
+
+    button {
+      margin-top: 10px;
+      background-color: $Green;
+      color: $White;
+    }
+  }
+}
+
+.posts-list {
+  width: 60%;
+
+  .title {
+    font-size: 24px;
+    font-weight: 700;
+    margin-bottom: 20px;
+  }
+
+  .post {
+    width: 100%;
+    background-color: $Dark-Grey;
+    border-radius: 10px;
+    margin: 20px 0;
+    padding: 15px;
+
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      .author-info {
+        display: flex;
+        align-items: center;
+
+        .thumbnail {
+          width: 50px;
+          height: 50px;
+          border-radius: 50%;
+          background-color: $Grey;
+          margin-right: 10px;
+        }
+
+        .username {
+          color: $White;
+          font-weight: 600;
+        }
+      }
+
+      .post-meta {
+        display: flex;
+        align-items: center;
+
+        .created-at {
+          color: $Grey;
+          margin-right: 15px;
+        }
+
+        .burger-menu {
+          button {
+            color: $White;
+          }
+        }
+      }
+    }
+
+    .main {
+      margin-top: 15px;
+
+      .photo {
+        width: 100%;
+        height: 300px;
+        background-color: $Grey;
+        margin-bottom: 10px;
+      }
+
+      .text {
+        color: $White;
+        font-size: 13px;
+        line-height: 1.5;
+      }
+    }
+
+    .comments {
+      margin-top: 20px;
+      color: $White;
+      font-size: 14px;
+      cursor: pointer;
+      background-color: $Grey;
+    }
+  }
+}
+
+// for kebab-menu items background
+::ng-deep.mat-mdc-menu-panel {
+  background-color: $Grey !important;
+  --mat-menu-container-shape: 0 !important;
+  border-radius: 5px !important;
+  padding: 0 10px;
+}

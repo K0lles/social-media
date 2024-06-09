@@ -1,5 +1,4 @@
 import {Component, Injectable, OnInit} from '@angular/core';
-import {Post} from "../post-list/post-list.component";
 import {ActivatedRoute, ActivatedRouteSnapshot, Resolve, Router, RouterStateSnapshot} from "@angular/router";
 import {PostDetail, PostsService} from "../services/posts.service";
 import {catchError, of} from "rxjs";

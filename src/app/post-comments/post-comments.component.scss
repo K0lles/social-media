@@ -51,11 +51,11 @@
     left: 2%;
 
     .created-at-label {
-      background-color: rgba(255, 255, 255, 0.2); /* Semi-transparent background */
+      //background-color: rgba(255, 255, 255, 0.2); /* Semi-transparent background */
       padding: 5px; /* Add padding */
       border-radius: 5px; /* Add border radius */
       font-size: 12px; /* Adjust font size */
-      color: $White; /* Text color */
+      color: $Grey; /* Text color */
     }
   }
 }

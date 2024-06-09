@@ -43,7 +43,6 @@
   <form [formGroup]="commentForm" class="add-comment" (ngSubmit)="addComment()">
     <mat-form-field class="comment-input">
       <input matInput placeholder="Add a comment..." formControlName="comment" />
-<!--      <mat-error *ngIf="commentForm.get('comment')?.invalid">Comment is required</mat-error>-->
     </mat-form-field>
     <button mat-raised-button color="primary" type="submit" [disabled]="commentForm.invalid">Comment</button>
   </form>

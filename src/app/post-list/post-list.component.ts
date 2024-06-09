@@ -1,13 +1,6 @@
 import { Component } from '@angular/core';
+import {Post} from "../services/posts.service";
 
-export interface Post {
-  id: number
-  userLogo: string
-  image: string
-  username: string
-  text: string
-  commentsAmount: number
-}
 
 @Component({
   selector: 'app-post-list',
@@ -23,7 +16,8 @@ export class PostListComponent {
       userLogo: "assets/images/avatar-jessica.jpeg",
       image: "assets/images/nature.jpg",
       text: "Hello guys. Whazzup?",
-      commentsAmount: 15
+      comments_amount: 15,
+      created_at: "2022"
     }
   ]
 }

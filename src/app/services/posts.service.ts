@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {HttpClient} from "@angular/common/http";
+import {HttpClient, HttpParams} from "@angular/common/http";
 import {Router} from "@angular/router";
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {Observable} from "rxjs";
@@ -36,9 +36,25 @@ export class PostsService {
     return this.http.get<PostDetail>(`api/v1/posts/${id}/post-detail/`);
   }
 
+  getPostsOfUser(userId: string | number) {
+    let httpParams = new HttpParams();
+    httpParams.append('user_id', userId);
+    return this.http.get<Post[]>("api/v1/posts/user-posts/", {params: {user_id: userId}});
+  }
+
   addComment(commentData: {text: string, post_id: number | string}): Observable<any> {
     return this.http.post("api/v1/posts/comments/add-comment/", commentData);
   }
+}
+
+export interface Post {
+  id: number
+  userLogo: string
+  image: string
+  username: string
+  text: string
+  comments_amount: number
+  created_at: string
 }
 
 
