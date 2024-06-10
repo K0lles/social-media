@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     "service.auth_users",
     "drf_extra_fields",
     "service.post",
+    "service.chat",
 ]
 
 MIDDLEWARE = [
