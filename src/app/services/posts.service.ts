@@ -45,6 +45,10 @@ export class PostsService {
   addComment(commentData: {text: string, post_id: number | string}): Observable<any> {
     return this.http.post("api/v1/posts/comments/add-comment/", commentData);
   }
+
+  getAnotherPeoplePosts() {
+    return this.http.get<AnotherPeoplePost[]>(`api/v1/posts/posts-followers/`);
+  }
 }
 
 export interface Post {
@@ -67,4 +71,16 @@ export interface PostDetail {
   owner_id: number
   created_at: string
   comments: {text: string, username: string, user_image: string, post_id: number, created_at: string}[]
+}
+
+
+export interface AnotherPeoplePost {
+  id: number
+  text: string
+  image: string
+  owner_username: string
+  owner_image: string
+  owner_id: number
+  created_at: string
+  comments_amount: number
 }

@@ -8,6 +8,7 @@ class ChatConsumer(WebsocketConsumer):
 
     def connect(self):
         print(self.scope["user"])
+        self.accept()
         pass
 
     def receive(self, text_data=None, bytes_data=None):

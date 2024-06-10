@@ -40,6 +40,32 @@ class MyPostSerializer(ModelSerializer):
         )
 
 
+class AnotherPeoplePosts(ModelSerializer):
+    owner_username = SerializerMethodField()
+    owner_image = SerializerMethodField()
+
+    def get_owner_username(self, instance: Post):
+        return  instance.owner.username
+
+    def get_owner_image(self, instance: Post):
+        if instance.owner.image:
+            return self.context["request"].build_absolute_uri(instance.owner.image.url)
+        return ""
+
+    class Meta:
+        model = Post
+        fields = (
+            "id",
+            "image",
+            "text",
+            "created_at",
+            "comments_amount",
+            "owner_username",
+            "owner_image",
+            "owner_id",
+        )
+
+
 class AddCommentSerializer(ModelSerializer):
     post_id = IntegerField()
 

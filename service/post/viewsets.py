@@ -9,9 +9,10 @@ from rest_framework.response import Response
 from rest_framework.serializers import BaseSerializer
 from rest_framework.viewsets import ModelViewSet
 
+from service.auth_users.models import UserSubscription
 from service.post.models import Post
 from service.post.serializers import PostCreateSerializer, MyPostSerializer, AddCommentSerializer, \
-    CommentDisplaySerializer, PostDetailSerializer
+    CommentDisplaySerializer, PostDetailSerializer, AnotherPeoplePosts
 from service.viewsets import BaseModelViewSet
 
 
@@ -21,13 +22,14 @@ class PostViewSet(ModelViewSet):
         "my_posts": MyPostSerializer,
         "post_detail": PostDetailSerializer,
         "user_posts": MyPostSerializer,
+        "posts_followers": AnotherPeoplePosts,
     }
 
     def get_serializer_class(self) -> BaseSerializer:
         return self.serializer_classes.get(self.action)
 
     def get_queryset(self):
-        return Post.objects.filter(user_id=self.request.user)
+        return Post.objects.filter(owner_id=self.request.user)
 
     @action(methods=["POST"], detail=False, url_path="add", url_name="add")
     def add(self, request: Request, *args, **kwargs):
@@ -64,6 +66,13 @@ class PostViewSet(ModelViewSet):
             return Response(data={"error": "No user id indicated."}, status=status.HTTP_400_BAD_REQUEST)
         posts = Post.objects.filter(owner_id=user_id).annotate(comments_amount=Count("comments", distinct=True))
         return Response(data=self.get_serializer(instance=posts, many=True).data, status=status.HTTP_200_OK)
+
+    @action(methods=["GET"], detail=False, url_path="posts_followers", url_name="posts-followers")
+    def posts_followers(self, request: Request, *args, **kwargs):
+        i_follow_on = UserSubscription.objects.filter(subscriber__id=self.request.user.id).values_list("on_user_id")
+        posts = Post.objects.filter(owner_id__in=i_follow_on).annotate(comments_amount=Count("comments", distinct=True))
+        serializer = self.get_serializer(instance=posts, many=True, context={"request": request})
+        return Response(data=serializer.data, status=status.HTTP_200_OK)
 
 
 class CommentViewSet(BaseModelViewSet):

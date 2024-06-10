@@ -1,8 +1,8 @@
-from django.db.models import Case, F, Q, Subquery, When
+from django.db.models import Case, F, Q, Subquery, When, OuterRef
 from rest_framework import status
 from rest_framework.response import Response
 
-from service.chat.models import Message
+from service.chat.models import Message, Chat
 from service.chat.serializers import MessageCreateSerializer
 from service.viewsets import BaseModelViewSet
 
@@ -26,6 +26,11 @@ class MessageViewSet(BaseModelViewSet):
         )
 
     def list(self, request, *args, **kwargs) -> Response:
+        Chat.objects.filter(chat_users__user_id=self.request.user.id).annotate(
+            last_message_text=Subquery(Message.objects.filter(chat_id=OuterRef("id")).order_by("-created_at").values("text")[:1]),
+            last_message_user_id=Subquery(Message.objects.filter(chat_id=OuterRef("id")).order_by("-created_at").values("sender_id")[:1]),
+            last_message_date=Subquery(Message.objects.filter(chat_id=OuterRef("id")).order_by("-created_at").values("created_at")[:1]),
+        )
         pass
 
     def create(self, request, *args, **kwargs) -> Response:
