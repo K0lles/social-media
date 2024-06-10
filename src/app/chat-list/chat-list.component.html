@@ -13,19 +13,22 @@
 
   <div class="chat-list">
     <div class="chat-item">
-      <div class="avatar"></div>
-      <div class="message">
+      <img class="avatar" src="assets/images/avatar-jessica.jpeg" (click)="toChat(1)">
+      <div class="message" (click)="toChat(1)">
         <h2>Ім'я Прізвище</h2>
         <p>Останнє повідомлення від користувача</p>
       </div>
-      <button mat-icon-button [matMenuTriggerFor]="chatMenu">
-        <mat-icon>more_vert</mat-icon>
-      </button>
-      <mat-menu #chatMenu="matMenu">
-        <button mat-menu-item>Save</button>
-        <button mat-menu-item>Option 2</button>
-        <button mat-menu-item>Option 3</button>
-      </mat-menu>
+      <div class="time-menu">
+        <div class="time">12:34 PM</div>
+        <button mat-icon-button [matMenuTriggerFor]="chatMenu">
+          <mat-icon>more_vert</mat-icon>
+        </button>
+        <mat-menu #chatMenu="matMenu">
+          <button mat-menu-item>Save</button>
+          <button mat-menu-item>Option 2</button>
+          <button mat-menu-item>Option 3</button>
+        </mat-menu>
+      </div>
     </div>
     <!-- Repeat for other chat items -->
     <div class="chat-item">

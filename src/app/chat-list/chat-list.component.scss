@@ -33,6 +33,13 @@
   padding: 10px;
   background-color: $Grey;
   border-radius: 10px;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+
+  &:hover {
+    background-color: lighten($Grey, 10%);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+  }
 
   .avatar {
     width: 50px;
@@ -53,6 +60,20 @@
       margin: 5px 0 0 0;
       font-size: 14px;
     }
+  }
+
+  button {
+    margin-left: 10px;
+  }
+}
+
+.time-menu {
+  display: flex;
+  align-items: center;
+
+  .time {
+    font-size: 12px;
+    color: $White;
   }
 
   button {

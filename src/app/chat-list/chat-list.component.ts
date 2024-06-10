@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-chat-list',
@@ -7,4 +8,10 @@ import { Component } from '@angular/core';
 })
 export class ChatListComponent {
 
+  constructor(private router: Router) {
+  }
+
+  toChat(id: string | number) {
+    this.router.navigate([`chat/${id}`])
+  }
 }
