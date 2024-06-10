@@ -1,0 +1,9 @@
+<div class="container">
+  <h2>Choose user to start a chat:</h2>
+  <div class="user-list">
+    <div class="user" *ngFor="let user of users" (click)="addUserToChat(user)">
+      {{ user }}
+    </div>
+  </div>
+  <button class="create-chat-btn" (click)="createChat()">Add Chat</button>
+</div>

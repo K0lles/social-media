@@ -27,6 +27,10 @@ import { PostCreateComponent } from './post-create/post-create.component';
 import { MyPostsComponent } from './my-posts/my-posts.component';
 import { UserInfoComponent } from './user-info/user-info.component';
 import { UserSubscribeComponent } from './user-subscribe/user-subscribe.component';
+import { OneOneChatComponent } from './one-one-chat/one-one-chat.component';
+import {MatListModule} from "@angular/material/list";
+import {MatDialogModule, MatDialogRef} from "@angular/material/dialog";
+import {MatCheckboxModule} from "@angular/material/checkbox";
 
 export function initializeAppFactory(authService: AuthService) {
   return async () => {
@@ -48,7 +52,8 @@ export function initializeAppFactory(authService: AuthService) {
     PostCreateComponent,
     MyPostsComponent,
     UserInfoComponent,
-    UserSubscribeComponent
+    UserSubscribeComponent,
+    OneOneChatComponent
   ],
   imports: [
     HttpClientModule,
@@ -63,11 +68,15 @@ export function initializeAppFactory(authService: AuthService) {
     NgOptimizedImage,
     ReactiveFormsModule,
     MatMenuModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    MatListModule,
+    MatDialogModule,
+    MatCheckboxModule,
   ],
   providers: [
     {provide: APP_INITIALIZER, useFactory: initializeAppFactory, deps: [AuthService], multi: true},
-    {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true}
+    {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true},
+    {provide: MatDialogRef, useValue: {}},
   ],
   bootstrap: [AppComponent]
 })

@@ -1,14 +1,16 @@
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {ChatService} from "../services/chat.service";
+import {webSocket} from "rxjs/webSocket";
 
 @Component({
   selector: 'app-chat',
   templateUrl: './chat.component.html',
   styleUrls: ['./chat.component.scss']
 })
-export class ChatComponent implements OnInit{
+export class ChatComponent implements OnInit {
   messageForm: FormGroup;
+  websocket: WebSocket | undefined;
 
   constructor(private fb: FormBuilder, private  chatService: ChatService) {
     this.messageForm = this.fb.group({

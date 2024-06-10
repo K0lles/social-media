@@ -1,0 +1,36 @@
+@import "../../styles";
+
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+}
+
+.user-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.user {
+  padding: 10px;
+  background-color: #f0f0f0;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.create-chat-btn {
+  margin-top: 20px;
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.create-chat-btn:hover {
+  background-color: #0056b3;
+}
