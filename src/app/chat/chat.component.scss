@@ -61,11 +61,13 @@
 .mine {
   align-self: flex-end;
   background-color: $Green;
+  max-width: 70%;
 }
 
 .theirs {
   align-self: flex-start;
   background-color: $Grey;
+  max-width: 70%;
 
   .username {
     font-size: 12px;

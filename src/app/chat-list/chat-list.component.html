@@ -1,123 +1,48 @@
-<div class="chat-list">
-  <div class="chat-item">
-    <div class="avatar"></div>
-    <div class="message">
-      <h2>Ім'я Прізвище</h2>
-      <p>Останнє повідомлення від користувача</p>
-    </div>
-  </div>
-  <div class="chat-item">
-    <img class="avatar" src="assets/images/avatar-jessica.jpeg">
-    <div class="message">
-      <h2>Ім'я Прізвище</h2>
-      <p>Останнє повідомлення від користувача</p>
-    </div>
-  </div>
-  <div class="chat-item">
-    <div class="avatar"></div>
-    <div class="message">
-      <h2>Ім'я Прізвище</h2>
-      <p>Останнє повідомлення від користувача</p>
-    </div>
-  </div>
-  <div class="chat-item">
-    <div class="avatar"></div>
-    <div class="message">
-      <h2>Ім'я Прізвище</h2>
-      <p>Останнє повідомлення від користувача</p>
-    </div>
-  </div>
-  <div class="chat-item">
-    <div class="avatar"></div>
-    <div class="message">
-      <h2>Ім'я Прізвище</h2>
-      <p>Останнє повідомлення від користувача</p>
-    </div>
-  </div>
-  <div class="chat-item">
-    <div class="avatar"></div>
-    <div class="message">
-      <h2>Ім'я Прізвище</h2>
-      <p>Останнє повідомлення від користувача</p>
-    </div>
-  </div>
-  <div class="chat-item">
-    <div class="avatar"></div>
-    <div class="message">
-      <h2>Ім'я Прізвище</h2>
-      <p>Останнє повідомлення від користувача</p>
-    </div>
-  </div>
-  <div class="chat-item">
-    <div class="avatar"></div>
-    <div class="message">
-      <h2>Ім'я Прізвище</h2>
-      <p>Останнє повідомлення від користувача</p>
-    </div>
-  </div>
-  <div class="chat-item">
-    <div class="avatar"></div>
-    <div class="message">
-      <h2>Ім'я Прізвище</h2>
-      <p>Останнє повідомлення від користувача</p>
-    </div>
-  </div>
-  <div class="chat-item">
-    <div class="avatar"></div>
-    <div class="message">
-      <h2>Ім'я Прізвище</h2>
-      <p>Останнє повідомлення від користувача</p>
-    </div>
-  </div>
-  <div class="chat-item">
-    <div class="avatar"></div>
-    <div class="message">
-      <h2>Ім'я Прізвище</h2>
-      <p>Останнє повідомлення від користувача</p>
-    </div>
-  </div>
-  <div class="chat-item">
-    <div class="avatar"></div>
-    <div class="message">
-      <h2>Ім'я Прізвище</h2>
-      <p>Останнє повідомлення від користувача</p>
-    </div>
-  </div>
-  <div class="chat-item">
-    <div class="avatar"></div>
-    <div class="message">
-      <h2>Ім'я Прізвище</h2>
-      <p>Останнє повідомлення від користувача</p>
-    </div>
-  </div>
-  <div class="chat-item">
-    <div class="avatar"></div>
-    <div class="message">
-      <h2>Ім'я Прізвище</h2>
-      <p>Останнє повідомлення від користувача</p>
-    </div>
-  </div>
-  <div class="chat-item">
-    <div class="avatar"></div>
-    <div class="message">
-      <h2>Ім'я Прізвище</h2>
-      <p>Останнє повідомлення від користувача</p>
-    </div>
-  </div>
-  <div class="chat-item">
-    <div class="avatar"></div>
-    <div class="message">
-      <h2>Ім'я Прізвище</h2>
-      <p>Останнє повідомлення від користувача</p>
-    </div>
-  </div>
-  <div class="chat-item">
-    <div class="avatar"></div>
-    <div class="message">
-      <h2>Ім'я Прізвище</h2>
-      <p>Останнє повідомлення від користувача</p>
-    </div>
+<div class="chat-list-container">
+  <div class="chat-list-header">
+    <h2>Chat list</h2>
+    <button mat-icon-button [matMenuTriggerFor]="listMenu">
+      <mat-icon>more_vert</mat-icon>
+    </button>
+    <mat-menu #listMenu="matMenu">
+      <button mat-menu-item>Option 1</button>
+      <button mat-menu-item>Option 2</button>
+      <button mat-menu-item>Option 3</button>
+    </mat-menu>
   </div>
 
-  <!-- Додайте більше елементів чату тут -->
+  <div class="chat-list">
+    <div class="chat-item">
+      <div class="avatar"></div>
+      <div class="message">
+        <h2>Ім'я Прізвище</h2>
+        <p>Останнє повідомлення від користувача</p>
+      </div>
+      <button mat-icon-button [matMenuTriggerFor]="chatMenu">
+        <mat-icon>more_vert</mat-icon>
+      </button>
+      <mat-menu #chatMenu="matMenu">
+        <button mat-menu-item>Save</button>
+        <button mat-menu-item>Option 2</button>
+        <button mat-menu-item>Option 3</button>
+      </mat-menu>
+    </div>
+    <!-- Repeat for other chat items -->
+    <div class="chat-item">
+      <img class="avatar" src="assets/images/avatar-jessica.jpeg">
+      <div class="message">
+        <h2>Ім'я Прізвище</h2>
+        <p>Останнє повідомлення від користувача</p>
+      </div>
+      <button mat-icon-button [matMenuTriggerFor]="chatMenu">
+        <mat-icon>more_vert</mat-icon>
+      </button>
+      <mat-menu #chatMenu="matMenu">
+        <button mat-menu-item>Save</button>
+        <button mat-menu-item>Option 2</button>
+        <button mat-menu-item>Option 3</button>
+      </mat-menu>
+    </div>
+    <!-- Repeat for other chat items -->
+  </div>
 </div>
