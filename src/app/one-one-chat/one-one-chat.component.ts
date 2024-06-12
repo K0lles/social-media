@@ -7,7 +7,15 @@ import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
   styleUrls: ['./one-one-chat.component.scss']
 })
 export class OneOneChatComponent {
-  users: string[] = []; // List of users, replace with actual user data
+
+  selectedIds: number[] = [];
+  isGroupChat: boolean = false;
+  users: any[] = [
+    { username: 'Lesyk', id: 23, image: ''},
+    { username: 'Lesyk', id: 34, image: ''},
+    { username: 'Lesyk', id: 3, image: ''},
+    { username: 'Lesyk', id: 2, image: ''},
+  ]; // List of users, replace with actual user data
 
   constructor() { }
 
@@ -26,6 +34,24 @@ export class OneOneChatComponent {
 
   createChat() {
     // Logic to send request to backend to create chat
-    console.log('Chat created');
+    console.log(this.selectedIds);
+  }
+
+  changeIsGroup(value: boolean) {
+    this.isGroupChat = value;
+
+    if (!value && this.selectedIds.length > 1) {
+      this.selectedIds = [];
+    }
+  }
+
+  setActiveUser(id: number) {
+    if (!this.selectedIds.includes(id)) {
+      this.selectedIds.push(id);
+
+      if (!this.isGroupChat) this.selectedIds = [id];
+    } else {
+      this.selectedIds = this.selectedIds.filter(s => s!= id);
+    }
   }
 }

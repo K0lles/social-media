@@ -19,10 +19,7 @@ export class ChatComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.websocket = new WebSocket("ws://localhost:8000/ws/chat/");
-    this.websocket.onopen = () => {
 
-    }
   }
 
   send() {

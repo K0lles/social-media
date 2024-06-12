@@ -32,3 +32,15 @@
 .flex-item {
   margin: 10px;
 }
+
+input {
+  color: white !important;
+}
+
+:host ::ng-deep.mat-mdc-text-field-wrapper {
+  background-color: $Grey !important;
+}
+
+::ng-deep.mat-mdc-autocomplete-panel {
+  background-color: $Grey !important;
+}

@@ -1,9 +1,15 @@
 <div class="container">
+  <mat-slide-toggle [ngModel]="isGroupChat" (ngModelChange)="changeIsGroup($event)">Group chat</mat-slide-toggle>
   <h2>Choose user to start a chat:</h2>
   <div class="user-list">
-    <div class="user" *ngFor="let user of users" (click)="addUserToChat(user)">
-      {{ user }}
+    <div class="user-item"
+         [class.active]="selectedIds.includes(user.id)"
+         (click)="setActiveUser(user.id)"
+         *ngFor="let user of users"
+    >
+      <img [src]="user.image">
+      <span>{{ user.username }}</span>
     </div>
   </div>
-  <button class="create-chat-btn" (click)="createChat()">Add Chat</button>
+  <button mat-button class="create-chat-btn" (click)="createChat()" [disabled]="!selectedIds.length">Add Chat</button>
 </div>

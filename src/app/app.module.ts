@@ -31,6 +31,8 @@ import { OneOneChatComponent } from './one-one-chat/one-one-chat.component';
 import {MatListModule} from "@angular/material/list";
 import {MatDialogModule, MatDialogRef} from "@angular/material/dialog";
 import {MatCheckboxModule} from "@angular/material/checkbox";
+import {MatSlideToggleModule} from "@angular/material/slide-toggle";
+import {MatAutocompleteModule} from "@angular/material/autocomplete";
 
 export function initializeAppFactory(authService: AuthService) {
   return async () => {
@@ -72,6 +74,8 @@ export function initializeAppFactory(authService: AuthService) {
     MatListModule,
     MatDialogModule,
     MatCheckboxModule,
+    MatSlideToggleModule,
+    MatAutocompleteModule,
   ],
   providers: [
     {provide: APP_INITIALIZER, useFactory: initializeAppFactory, deps: [AuthService], multi: true},
