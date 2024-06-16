@@ -12,7 +12,7 @@ import {PostCreateComponent} from "./post-create/post-create.component";
 import {MyPostsComponent} from "./my-posts/my-posts.component";
 import {UserInfoComponent} from "./user-info/user-info.component";
 import {UserSubscribeComponent} from "./user-subscribe/user-subscribe.component";
-import {ChatComponent} from "./chat/chat.component";
+import {ChatComponent, ChatResolverService} from "./chat/chat.component";
 import {OneOneChatComponent} from "./one-one-chat/one-one-chat.component";
 
 const routes: Routes = [
@@ -22,8 +22,8 @@ const routes: Routes = [
   { path: "user/update", component: UserUpdateComponent, canActivate: [authGuard] },
   { path: "comments/:postId", component: PostCommentsComponent, canActivate: [authGuard], resolve: {post: PostCommentsResolver} },
   { path: "messages", component: ChatListComponent, canActivate: [authGuard] },
-  { path: "chat/:chatId", component: ChatComponent, canActivate: [authGuard] },
-  { path: "one-to-one/create", component: OneOneChatComponent, canActivate: [authGuard] },
+  { path: "chat/create", component: OneOneChatComponent, canActivate: [authGuard] },
+  { path: "chat/:chatId", component: ChatComponent, canActivate: [authGuard], resolve: {chatData: ChatResolverService}},
   { path: "posts/add", component: PostCreateComponent, canActivate: [authGuard] },
   { path: "posts/my", component: MyPostsComponent, canActivate: [authGuard] },
   { path: "me", component: UserInfoComponent, canActivate: [authGuard] },

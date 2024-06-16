@@ -4,7 +4,7 @@
     <div class="flex-item"><h3>Social Media App</h3></div>
   </div>
   <div class="inner-header-block">
-    <mat-form-field>
+    <mat-form-field style="margin-top: 10px; margin-right: 20px;">
       <mat-label>Select chat</mat-label>
       <input type="text" matInput [formControl]="userControl" [matAutocomplete]="auto">
       <mat-autocomplete #auto="matAutocomplete"
@@ -25,7 +25,7 @@
       <button mat-raised-button routerLink="/login" color="primary">Login or create account</button>
     </ng-template>
     <div class="flex-item">
-        <a routerLink="/messages" mat-icon-button><mat-icon>message</mat-icon></a>
+        <a class="message-icon" routerLink="/messages" mat-icon-button><mat-icon>message</mat-icon></a>
     </div>
     <ng-container *ngIf="isAuthenticated">
       <div class="burger-menu">

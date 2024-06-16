@@ -45,7 +45,7 @@ class AnotherPeoplePosts(ModelSerializer):
     owner_image = SerializerMethodField()
 
     def get_owner_username(self, instance: Post):
-        return  instance.owner.username
+        return instance.owner.username
 
     def get_owner_image(self, instance: Post):
         if instance.owner.image:

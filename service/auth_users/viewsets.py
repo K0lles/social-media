@@ -17,6 +17,7 @@ class UserModelViewSet(ModelViewSet):
         "user_info": serializers.UserInfoSerializer,
         "user_update": serializers.UserInfoSerializer,
         "another_user": serializers.AnotherUserSerializer,
+        "users_for_search": serializers.UsersForSearchSeriliazer,
     }
 
     def get_serializer_class(self) -> serializers.ModelSerializer:
@@ -37,9 +38,7 @@ class UserModelViewSet(ModelViewSet):
 
     @action(methods=["GET"], detail=False, url_path="user-info")
     def user_info(self, request: Request, *args, **kwargs):
-        serializer: serializers.ModelSerializer = self.get_serializer(
-            instance=request.user
-        )
+        serializer: serializers.ModelSerializer = self.get_serializer(instance=request.user)
         return Response(data=serializer.data, status=status.HTTP_200_OK)
 
     @action(methods=["POST"], detail=False, url_path="logout")
@@ -63,12 +62,8 @@ class UserModelViewSet(ModelViewSet):
         serializer = self.get_serializer(data=request.data, instance=request.user)
         if serializer.is_valid():
             serializer.save()
-            representation_serializer = UserInfoDisplay(
-                instance=User.objects.get(id=self.request.user.id)
-            )
-            return Response(
-                data=representation_serializer.data, status=status.HTTP_200_OK
-            )
+            representation_serializer = UserInfoDisplay(instance=User.objects.get(id=self.request.user.id))
+            return Response(data=representation_serializer.data, status=status.HTTP_200_OK)
         else:
             return Response(
                 data={"error": "Something went wrong."},
@@ -79,12 +74,19 @@ class UserModelViewSet(ModelViewSet):
     def another_user(self, request: Request, *args, **kwargs):
         if not (user_id := request.query_params.get("user_id", None)):
             return Response(data={"error": "No user id."}, status=status.HTTP_400_BAD_REQUEST)
-        return Response(data=self.get_serializer(instance=User.objects.get(id=user_id), context={"user": request.user, "request": request}).data, status=status.HTTP_200_OK)
+        return Response(
+            data=self.get_serializer(
+                instance=User.objects.get(id=user_id), context={"user": request.user, "request": request}
+            ).data,
+            status=status.HTTP_200_OK,
+        )
 
     @action(methods=["POST"], detail=True, url_path="subscribe", url_name="subscribe")
     def subscribe(self, request, pk, *args, **kwargs):
         if UserSubscription.objects.filter(subscriber_id=request.user.id, on_user_id=pk).exists():
-            return Response(data={"error": "You are already subscribed on this user"}, status=status.HTTP_400_BAD_REQUEST)
+            return Response(
+                data={"error": "You are already subscribed on this user"}, status=status.HTTP_400_BAD_REQUEST
+            )
         subscription = UserSubscription(subscriber_id=request.user.id, on_user_id=pk)
         subscription.save()
         return Response(status=status.HTTP_200_OK)
@@ -95,3 +97,8 @@ class UserModelViewSet(ModelViewSet):
             return Response(data={"error": "You were not subscribed on this user."}, status=status.HTTP_400_BAD_REQUEST)
         UserSubscription.objects.filter(subscriber_id=request.user.id, on_user_id=pk).delete()
         return Response(status=status.HTTP_200_OK)
+
+    @action(methods=["GET"], detail=False, url_path="users-for-search", url_name="users_for_search")
+    def users_for_search(self, request: Request, *args, **kwargs):
+        users = User.objects.all().order_by("-date_joined")
+        return Response(data=self.get_serializer(users, many=True).data, status=status.HTTP_200_OK)

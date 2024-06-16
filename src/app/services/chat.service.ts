@@ -19,12 +19,65 @@ export class ChatService {
         url: SOCKET_URL,
         protocol: [
           localStorage.getItem('accessToken') ?? ''
-        ]
+        ],
       });
 
       this.socket.asObservable().subscribe((response) => {
         console.log(response)
-      })
+      });
     }
   }
+
+  getChatInfo(chatId: string | number) {
+    return this.http.get<ChatInfo>(`api/v1/chat/${chatId}/`);
+  }
+
+  getMessageList(chatId: string) {
+    return this.http.get<Message[]>(`api/v1/chat/messages/`, {params: {chat_id: chatId}});
+  }
+
+  connectWebSocket() {
+    if (this.authService.isAuthenticated) {
+      this.socket = webSocket({
+        url: SOCKET_URL,
+        protocol: [
+          localStorage.getItem('accessToken') ?? ''
+        ],
+      });
+
+      this.socket.asObservable().subscribe((response) => {
+        console.log(response)
+      });
+    }
+  }
+
+  createSingleChat(data: {user_id: number}) {
+    return this.http.post<CreateSingleChat>('api/v1/chat/create-single-chat/', data);
+  }
+
+  createGroupChat(data: any) {
+    return this.http.post<CreateSingleChat>('api/v1/chat/create-group-chat/', data);
+  }
+}
+
+
+export interface Message {
+  id: number
+  sender_username: string
+  text: string
+  created_at: string
+}
+
+export interface CreateSingleChat {
+  id: number
+  user: number
+  created_at: string
+}
+
+export interface ChatInfo {
+  id: number
+  name: string | null
+  users: {user_id: number, user_username: string, user_first_name: string, user_last_name: string, user_image: string | null}[]
+  is_group: boolean
+  created_at: string
 }

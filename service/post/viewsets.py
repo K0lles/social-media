@@ -11,8 +11,14 @@ from rest_framework.viewsets import ModelViewSet
 
 from service.auth_users.models import UserSubscription
 from service.post.models import Post
-from service.post.serializers import PostCreateSerializer, MyPostSerializer, AddCommentSerializer, \
-    CommentDisplaySerializer, PostDetailSerializer, AnotherPeoplePosts
+from service.post.serializers import (
+    PostCreateSerializer,
+    MyPostSerializer,
+    AddCommentSerializer,
+    CommentDisplaySerializer,
+    PostDetailSerializer,
+    AnotherPeoplePosts,
+)
 from service.viewsets import BaseModelViewSet
 
 
@@ -37,9 +43,7 @@ class PostViewSet(ModelViewSet):
         if serializer.is_valid():
             serializer.save()
             return Response(status=status.HTTP_200_OK)
-        return Response(
-            data={"error": "Something went wrong."}, status=status.HTTP_400_BAD_REQUEST
-        )
+        return Response(data={"error": "Something went wrong."}, status=status.HTTP_400_BAD_REQUEST)
 
     @action(methods=["GET"], detail=False, url_path="my-posts", url_name="my_posts")
     def my_posts(self, request, *args, **kwargs):
@@ -57,7 +61,9 @@ class PostViewSet(ModelViewSet):
             post = Post.objects.filter(id=pk).first()
         except ObjectDoesNotExist:
             return Response(data={"error": "Post was not found."}, status=status.HTTP_400_BAD_REQUEST)
-        return Response(data=self.get_serializer(instance=post, context={"request": request}).data, status=status.HTTP_200_OK)
+        return Response(
+            data=self.get_serializer(instance=post, context={"request": request}).data, status=status.HTTP_200_OK
+        )
 
     @action(methods=["GET"], detail=False, url_path="user-posts", url_name="user_posts")
     def user_posts(self, request: Request, *args, **kwargs):
@@ -85,5 +91,8 @@ class CommentViewSet(BaseModelViewSet):
         serializer: BaseSerializer = self.get_serializer(data=request.data, context={"user": self.request.user})
         if serializer.is_valid():
             comment = serializer.save()
-            return Response(data=CommentDisplaySerializer(instance=comment, context={"request": request}).data, status=status.HTTP_200_OK)
+            return Response(
+                data=CommentDisplaySerializer(instance=comment, context={"request": request}).data,
+                status=status.HTTP_200_OK,
+            )
         return Response(data=serializer.errors, status=status.HTTP_400_BAD_REQUEST)

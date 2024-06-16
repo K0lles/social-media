@@ -110,3 +110,19 @@ class AnotherUserSerializer(ModelSerializer):
             "subscribers_amount",
             "is_subscribed",
         )
+
+
+class UsersForSearchSeriliazer(ModelSerializer):
+    user_image = SerializerMethodField(allow_null=True, read_only=True)
+
+    def get_user_image(self, instance: User) -> str | None:
+        if instance.image:
+            return f"http://localhost:8000{instance.image.url}"
+
+    class Meta:
+        model = User
+        fields = (
+            "id",
+            "username",
+            "user_image",
+        )

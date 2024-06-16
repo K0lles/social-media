@@ -25,8 +25,8 @@ class ChatUser(Model):
 
 
 class Message(Model):
-    sender = ForeignKey(User, on_delete=DO_NOTHING, related_name="sender")
-    receiver = ForeignKey(User, on_delete=DO_NOTHING, related_name="receiver")
-    chat = ForeignKey(Chat, on_delete=DO_NOTHING, related_name="messages")
+    sender = ForeignKey(User, on_delete=CASCADE, related_name="sender")
+    receiver = ForeignKey(User, on_delete=CASCADE, related_name="receiver", null=True)
+    chat = ForeignKey(Chat, on_delete=CASCADE, related_name="messages")
     text = TextField()
     created_at = DateTimeField(auto_now_add=True)

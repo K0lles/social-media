@@ -1,67 +1,106 @@
 <div class="chat-container">
   <div class="main">
     <div class="header">
-      <img src="assets/images/avatar-jessica.jpeg" class="chat-user-logo">
-      <div class="user-info">
-        <h2>Ім'я Прізвище</h2>
-        <p>@username</p>
-      </div>
+      <ng-container *ngIf="this.chat?.is_group">
+        <img src="assets/images/avatar-jessica.jpeg" class="chat-user-logo">
+        <div class="user-info">
+          <h2>{{ this.chat.name }}</h2>
+<!--          <p>@username</p>-->
+        </div>
+      </ng-container>
+      <ng-container *ngIf="!this.chat.is_group && this.chat.users && this.chat.users.length > 0">
+        <img [src]="this.chat.users[0].user_image ? this.chat.users[0].user_image : 'assets/images/empty-user.jpg'" class="chat-user-logo">
+        <div class="user-info">
+          <h2>{{ this.chat.users[0].user_first_name }} {{ this.chat.users[0].user_last_name }}</h2>
+          <p>{{ this.chat.users[0].user_username }}</p>
+        </div>
+      </ng-container>
     </div>
 
-    <div class="messages">
-      <div class="message mine">
-        <p>Це моє повідомлення</p>
+    <ng-container *ngIf="messageList">
+      <div class="messages" #messagesContainer>
+        <ng-container *ngFor="let message of messageList">
+          <ng-container *ngIf="message.sender_username == this.user?.username else theirs">
+            <div class="message mine">
+              <p>{{ message.text }}</p>
+              <span class="time">{{ message.created_at | date: "HH:mm" }}</span>
+            </div>
+          </ng-container>
+          <ng-template #theirs>
+            <div class="message theirs">
+              <div
+                *ngIf="this.chat?.is_group && message.sender_username != this.user?.username" class="username"
+              >{{ message.sender_username }}</div>
+              <p>{{ message.text }}</p>
+              <span class="time">{{ message.created_at | date: "HH:mm" }}</span>
+            </div>
+          </ng-template>
+        </ng-container>
+<!--        <div *ngFor="let message of messageList"-->
+<!--             [ngClass]="{-->
+<!--                'message mine': message.sender_username == this.user?.username,-->
+<!--                'message theirs': message.sender_username != this.user?.username-->
+<!--              }">-->
+<!--          <div *ngIf="this.chat && this.chat?.is_group" class="username">{{ message.sender_username }}</div>-->
+<!--          <p>{{message.text}}</p>-->
+<!--          <span class="time">{{ message.created_at | date : "YYYY-MM-dd hh:mm" }}</span>-->
+<!--        </div>-->
       </div>
-      <div class="message theirs">
-        <p>Це повідомлення співбесідника</p>
-      </div>
-      <div class="message mine">
-        <p>Це моє повідомлення</p>
-      </div>
-      <div class="message theirs">
-        <p>Це повідомлення співбесідника</p>
-      </div>
-      <div class="message mine">
-        <p>Це моє повідомлення</p>
-      </div>
-      <div class="message theirs">
-        <p>Це повідомлення співбесідника</p>
-      </div>
-      <div class="message mine">
-        <p>Це моє повідомлення</p>
-      </div>
-      <div class="message theirs">
-        <p>Це повідомлення співбесідника</p>
-      </div>
-      <div class="message mine">
-        <p>Це моє повідомлення</p>
-      </div>
-      <div class="message theirs">
-        <p>Це повідомлення співбесідника</p>
-      </div>
-      <div class="message mine">
-        <p>Це моє повідомлення</p>
-      </div>
-      <div class="message theirs">
-        <p>Це повідомлення співбесідника</p>
-      </div>
-      <div class="message mine">
-        <p>Це моє повідомлення</p>
-      </div>
-      <div class="message theirs">
-        <p>Це повідомлення співбесідника</p>
-      </div>
-      <div class="message mine">
-        <p>Це моє повідомлення</p>
-        <span class="time">12:01 PM</span>
-      </div>
-      <div class="message theirs">
-        <div class="username">User1</div>
-        <p>Це повідомлення співбесідника </p>
-        <span class="time">12:01 PM</span>
-      </div>
+    </ng-container>
+<!--    <div class="messages" #messagesContainer>-->
+<!--      <div class="message mine">-->
+<!--        <p>Це моє повідомлення</p>-->
+<!--      </div>-->
+<!--      <div class="message theirs">-->
+<!--        <p>Це повідомлення співбесідника</p>-->
+<!--      </div>-->
+<!--      <div class="message mine">-->
+<!--        <p>Це моє повідомлення</p>-->
+<!--      </div>-->
+<!--      <div class="message theirs">-->
+<!--        <p>Це повідомлення співбесідника</p>-->
+<!--      </div>-->
+<!--      <div class="message mine">-->
+<!--        <p>Це моє повідомлення</p>-->
+<!--      </div>-->
+<!--      <div class="message theirs">-->
+<!--        <p>Це повідомлення співбесідника</p>-->
+<!--      </div>-->
+<!--      <div class="message mine">-->
+<!--        <p>Це моє повідомлення</p>-->
+<!--      </div>-->
+<!--      <div class="message theirs">-->
+<!--        <p>Це повідомлення співбесідника</p>-->
+<!--      </div>-->
+<!--      <div class="message mine">-->
+<!--        <p>Це моє повідомлення</p>-->
+<!--      </div>-->
+<!--      <div class="message theirs">-->
+<!--        <p>Це повідомлення співбесідника</p>-->
+<!--      </div>-->
+<!--      <div class="message mine">-->
+<!--        <p>Це моє повідомлення</p>-->
+<!--      </div>-->
+<!--      <div class="message theirs">-->
+<!--        <p>Це повідомлення співбесідника</p>-->
+<!--      </div>-->
+<!--      <div class="message mine">-->
+<!--        <p>Це моє повідомлення</p>-->
+<!--      </div>-->
+<!--      <div class="message theirs">-->
+<!--        <p>Це повідомлення співбесідника</p>-->
+<!--      </div>-->
+<!--      <div class="message mine">-->
+<!--        <p>Це моє повідомлення</p>-->
+<!--        <span class="time">12:01 PM</span>-->
+<!--      </div>-->
+<!--      <div class="message theirs">-->
+<!--        <div class="username">User1</div>-->
+<!--        <p>Це повідомлення співбесідника </p>-->
+<!--        <span class="time">12:01 PM</span>-->
+<!--      </div>-->
 
-    </div>
+<!--    </div>-->
 
     <form [formGroup]="messageForm" class="input-area" (ngSubmit)="send()">
       <mat-form-field appearance="fill">

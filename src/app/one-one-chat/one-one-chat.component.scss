@@ -12,11 +12,19 @@ mat-slide-toggle {
   margin-bottom: 10px;
 }
 
+.user-search-input {
+  margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+  width: 40%;
+}
+
 .user-list {
   margin-top: 10px;
   display: flex;
   flex-direction: column;
   gap: 10px;
+  width: 40%;
 
   .user-item {
     padding: 10px;
@@ -24,24 +32,24 @@ mat-slide-toggle {
     align-items: center;
     width: 100%;
     justify-content: flex-start;
-    background-color: #00056c;
+    background-color: #5000a3;
     border-radius: 5px;
-    height: 40px;
+    height: 65px;
     cursor: pointer;
     column-gap: 10px;
 
     &:hover {
-      background-color: #0007ac;
+      background-color: #2e005e;
     }
 
     &.active {
-      background-color: #0007ac;
+      background-color: #2e005e;
       outline: 2px solid #0b700b;
     }
 
     img {
-      width: 30px;
-      height: 30px;
+      width: 40px;
+      height: 40px;
       border-radius: 50%;
     }
   }
@@ -59,4 +67,12 @@ mat-slide-toggle {
 
 .create-chat-btn:hover {
   background-color: #0056b3;
+}
+
+:host ::ng-deep.mat-mdc-text-field-wrapper {
+  background-color: $Grey !important;
+}
+
+input {
+  color: white !important;
 }

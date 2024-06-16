@@ -1,13 +1,23 @@
 <div class="container">
   <mat-slide-toggle [ngModel]="isGroupChat" (ngModelChange)="changeIsGroup($event)">Group chat</mat-slide-toggle>
+  <ng-container *ngIf="this.isGroupChat">
+    <mat-form-field class="user-search-input" appearance="fill">
+      <mat-label>Enter name of the chat...</mat-label>
+      <input matInput [formControl]="chatNameControl">
+    </mat-form-field>
+  </ng-container>
   <h2>Choose user to start a chat:</h2>
+  <mat-form-field class="user-search-input" appearance="fill">
+    <mat-label>Search users...</mat-label>
+    <input matInput [formControl]="searchControl">
+  </mat-form-field>
   <div class="user-list">
     <div class="user-item"
          [class.active]="selectedIds.includes(user.id)"
          (click)="setActiveUser(user.id)"
-         *ngFor="let user of users"
+         *ngFor="let user of filteredUsers"
     >
-      <img [src]="user.image">
+      <img [src]="user.user_image ?? 'assets/images/empty-user.jpg'">
       <span>{{ user.username }}</span>
     </div>
   </div>

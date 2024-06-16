@@ -197,6 +197,12 @@ export class AuthService {
   unsubscribe(id: string | number | undefined) {
     return this.http.post(`api/v1/auth/${id}/unsubscribe/`, {})
   }
+
+  getUsersForSearch() {
+    return this.http.get<UserForSearch[]>('api/v1/auth/users-for-search/');
+  }
+
+
 }
 
 
@@ -241,4 +247,10 @@ export interface AnotherUserResponse {
   image: string
   subscribers_amount: number | null
   is_subscribed: boolean
+}
+
+export interface UserForSearch {
+  id: number
+  username: string
+  user_image: string | null
 }
