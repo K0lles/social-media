@@ -102,3 +102,4 @@ class UserModelViewSet(ModelViewSet):
     def users_for_search(self, request: Request, *args, **kwargs):
         users = User.objects.all().order_by("-date_joined")
         return Response(data=self.get_serializer(users, many=True).data, status=status.HTTP_200_OK)
+

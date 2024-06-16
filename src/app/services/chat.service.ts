@@ -28,6 +28,10 @@ export class ChatService {
     }
   }
 
+  getChatList() {
+    return this.http.get<ChatList[]>('api/v1/chat/');
+  }
+
   getChatInfo(chatId: string | number) {
     return this.http.get<ChatInfo>(`api/v1/chat/${chatId}/`);
   }
@@ -79,5 +83,15 @@ export interface ChatInfo {
   name: string | null
   users: {user_id: number, user_username: string, user_first_name: string, user_last_name: string, user_image: string | null}[]
   is_group: boolean
+  created_at: string
+}
+
+export interface ChatList {
+  id: number
+  chat_name: string
+  last_message_text: string | null
+  is_group: boolean
+  image: string | null
+  last_message_date: string | null
   created_at: string
 }

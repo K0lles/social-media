@@ -80,3 +80,16 @@
     margin-left: 10px;
   }
 }
+
+.empty-message {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 60vh;
+  text-align: center;
+
+  h1 {
+    font-size: 2.5em;
+    color: $White;
+  }
+}

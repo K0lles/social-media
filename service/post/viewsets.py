@@ -70,10 +70,10 @@ class PostViewSet(ModelViewSet):
         user_id = request.query_params.get("user_id", None)
         if not user_id:
             return Response(data={"error": "No user id indicated."}, status=status.HTTP_400_BAD_REQUEST)
-        posts = Post.objects.filter(owner_id=user_id).annotate(comments_amount=Count("comments", distinct=True))
+        posts = Post.objects.filter(owner_id=user_id).annotate(comments_amount=Count("comments", distinct=True)).order_by("-created_at")
         return Response(data=self.get_serializer(instance=posts, many=True).data, status=status.HTTP_200_OK)
 
-    @action(methods=["GET"], detail=False, url_path="posts_followers", url_name="posts-followers")
+    @action(methods=["GET"], detail=False, url_path="posts-followers", url_name="posts_followers")
     def posts_followers(self, request: Request, *args, **kwargs):
         i_follow_on = UserSubscription.objects.filter(subscriber__id=self.request.user.id).values_list("on_user_id")
         posts = Post.objects.filter(owner_id__in=i_follow_on).annotate(comments_amount=Count("comments", distinct=True))

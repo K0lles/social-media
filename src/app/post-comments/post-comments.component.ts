@@ -31,10 +31,10 @@ export class PostCommentsComponent implements OnInit{
     this.activatedRoute.data.subscribe((data) => {
       this.post = data['post'];
     });
-    this.post.image = this.post.image.replace(':4200', ':8000');
-    this.post.owner_image = this.post.owner_image.replace(':4200', ':8000');
+    this.post.image = this.post.image ? this.post.image.replace(':4200', ':8000') : null;
+    this.post.owner_image = this.post.owner_image ?  this.post.owner_image.replace(':4200', ':8000') : null;
     for (let comment of this.post.comments) {
-      comment.user_image = comment.user_image.replace(':4200', ':8000');
+      comment.user_image = comment.user_image ? comment.user_image.replace(':4200', ':8000') : null;
     }
     this.commentForm = this.fb.group({
       comment: ['', [Validators.required, Validators.minLength(1)]]

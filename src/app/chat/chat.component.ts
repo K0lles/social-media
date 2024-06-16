@@ -29,17 +29,6 @@ export class ChatComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit() {
-    // let chatId: string | number | null = this.route.snapshot.paramMap.get('chatId');
-    // if (chatId) {
-    //   this.chatService.getChatInfo(chatId).subscribe(
-    //     (response) => {
-    //       this.chat = response
-    //     }
-    //   );
-    //   this.chatService.getMessageList(chatId).subscribe((response) => {
-    //     this.messageList = response;
-    //   });
-    // }
     let resolvedData = this.route.snapshot.data['chatData'];
     if (resolvedData) {
       this.chat = resolvedData.chat;

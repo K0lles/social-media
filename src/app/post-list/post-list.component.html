@@ -1,25 +1,30 @@
 <div class="post-container">
-  <div *ngFor="let post of posts" class="post">
-      <div class="header">
-        <div class="author-info">
-          <img src="{{ post.owner_image }}" class="thumbnail">
-          <div class="username">{{ post.owner_username }}</div>
+  <ng-container *ngIf="posts.length else isEmpty">
+    <div *ngFor="let post of posts" class="post">
+        <div class="header">
+          <div class="author-info">
+            <img src="{{ post.owner_image ? post.owner_image.replace(':4200', ':8000') : '' }}" class="thumbnail">
+            <div class="username">{{ post.owner_username }}</div>
+          </div>
+          <div class="burger-menu">
+            <button mat-icon-button [matMenuTriggerFor]="menu">
+              <mat-icon>more_vert</mat-icon>
+            </button>
+            <mat-menu #menu="matMenu">
+              <button mat-menu-item>Зберегти</button>
+            </mat-menu>
+          </div>
         </div>
-        <div class="burger-menu">
-          <button mat-icon-button [matMenuTriggerFor]="menu">
-            <mat-icon>more_vert</mat-icon>
-          </button>
-          <mat-menu #menu="matMenu">
-            <button mat-menu-item>Зберегти</button>
-            <button mat-menu-item>Опція 2</button>
-            <button mat-menu-item>Опція 3</button>
-          </mat-menu>
+        <div class="main">
+          <img *ngIf="post.image" src="{{ post.image ? post.image.replace(':4200', ':8000') : '' }}" class="photo"/>
+          <div class="text">{{ post.text }}</div>
         </div>
-      </div>
-      <div class="main">
-        <img src="{{ post.image }}" class="photo"/>
-        <div class="text">{{ post.text }}</div>
-      </div>
-      <a mat-stroked-button routerLink="/comments/{{post.id}}" class="comments">{{ post.comments_amount }} коментарів</a>
-  </div>
+        <a mat-stroked-button routerLink="/comments/{{post.id}}" class="comments">{{ post.comments_amount }} коментарів</a>
+    </div>
+  </ng-container>
+  <ng-template #isEmpty>
+    <div class="empty-message">
+      <h1>No posts available</h1>
+    </div>
+  </ng-template>
 </div>

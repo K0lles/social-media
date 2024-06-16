@@ -9,41 +9,69 @@
     </mat-menu>
   </div>
 
-  <div class="chat-list">
-    <div class="chat-item">
-      <img class="avatar" src="assets/images/avatar-jessica.jpeg" (click)="toChat(1)">
-      <div class="message" (click)="toChat(1)">
-        <h2>Ім'я Прізвище</h2>
-        <p>Останнє повідомлення від користувача</p>
-      </div>
-      <div class="time-menu">
-        <div class="time">12:34 PM</div>
-        <button mat-icon-button [matMenuTriggerFor]="chatMenu">
-          <mat-icon>more_vert</mat-icon>
-        </button>
-        <mat-menu #chatMenu="matMenu">
-          <button mat-menu-item>Save</button>
-          <button mat-menu-item>Option 2</button>
-          <button mat-menu-item>Option 3</button>
-        </mat-menu>
+  <ng-container *ngIf="this.chats.length > 0 else isEmpty">
+    <div class="chat-list">
+      <div class="chat-item" *ngFor="let chat of chats">
+        <img class="avatar" *ngIf="chat.image" [src]="chat.image" (click)="toChat(chat.id)">
+        <img class="avatar" *ngIf="!chat.image" src="assets/images/empty-user.jpg" (click)="toChat(chat.id)">
+        <div class="message" (click)="toChat(chat.id)">
+          <h2>{{ chat.chat_name }}</h2>
+          <p>{{ chat.last_message_text ? chat.last_message_text : '' }}</p>
+        </div>
+        <div *ngIf="chat.last_message_date" class="time-menu">
+          <div class="time">{{ chat.last_message_date | date : "HH.mm" }}</div>
+          <div class="time" *ngIf="!chat.last_message_date">{{ chat.created_at | date : "HH.mm" }}</div>
+          <button mat-icon-button [matMenuTriggerFor]="chatMenu">
+            <mat-icon>more_vert</mat-icon>
+          </button>
+          <mat-menu #chatMenu="matMenu">
+            <button mat-menu-item>Delete</button>
+          </mat-menu>
+        </div>
       </div>
     </div>
-    <!-- Repeat for other chat items -->
-    <div class="chat-item">
-      <img class="avatar" src="assets/images/avatar-jessica.jpeg">
-      <div class="message">
-        <h2>Ім'я Прізвище</h2>
-        <p>Останнє повідомлення від користувача</p>
-      </div>
-      <button mat-icon-button [matMenuTriggerFor]="chatMenu">
-        <mat-icon>more_vert</mat-icon>
-      </button>
-      <mat-menu #chatMenu="matMenu">
-        <button mat-menu-item>Save</button>
-        <button mat-menu-item>Option 2</button>
-        <button mat-menu-item>Option 3</button>
-      </mat-menu>
+  </ng-container>
+  <ng-template #isEmpty>
+    <div class="empty-message">
+      <h1>No chats available</h1>
     </div>
-    <!-- Repeat for other chat items -->
-  </div>
+  </ng-template>
+
+<!--  <div class="chat-list">-->
+<!--    <div class="chat-item">-->
+<!--      <img class="avatar" src="assets/images/avatar-jessica.jpeg" (click)="toChat(1)">-->
+<!--      <div class="message" (click)="toChat(1)">-->
+<!--        <h2>Ім'я Прізвище</h2>-->
+<!--        <p>Останнє повідомлення від користувача</p>-->
+<!--      </div>-->
+<!--      <div class="time-menu">-->
+<!--        <div class="time">12:34 PM</div>-->
+<!--        <button mat-icon-button [matMenuTriggerFor]="chatMenu">-->
+<!--          <mat-icon>more_vert</mat-icon>-->
+<!--        </button>-->
+<!--        <mat-menu #chatMenu="matMenu">-->
+<!--          <button mat-menu-item>Save</button>-->
+<!--          <button mat-menu-item>Option 2</button>-->
+<!--          <button mat-menu-item>Option 3</button>-->
+<!--        </mat-menu>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--    &lt;!&ndash; Repeat for other chat items &ndash;&gt;-->
+<!--    <div class="chat-item">-->
+<!--      <img class="avatar" src="assets/images/avatar-jessica.jpeg">-->
+<!--      <div class="message">-->
+<!--        <h2>Ім'я Прізвище</h2>-->
+<!--        <p>Останнє повідомлення від користувача</p>-->
+<!--      </div>-->
+<!--      <button mat-icon-button [matMenuTriggerFor]="chatMenu">-->
+<!--        <mat-icon>more_vert</mat-icon>-->
+<!--      </button>-->
+<!--      <mat-menu #chatMenu="matMenu">-->
+<!--        <button mat-menu-item>Save</button>-->
+<!--        <button mat-menu-item>Option 2</button>-->
+<!--        <button mat-menu-item>Option 3</button>-->
+<!--      </mat-menu>-->
+<!--    </div>-->
+<!--    &lt;!&ndash; Repeat for other chat items &ndash;&gt;-->
+<!--  </div>-->
 </div>

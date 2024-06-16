@@ -1,6 +1,6 @@
 from django.db.models import Q, F
 from rest_framework.exceptions import ValidationError
-from rest_framework.fields import SerializerMethodField, BooleanField
+from rest_framework.fields import SerializerMethodField, BooleanField, CharField
 from rest_framework.serializers import ModelSerializer
 
 from service.chat.models import Message, Chat, ChatUser
@@ -38,10 +38,22 @@ class MessageDisplaySerializer(ModelSerializer):
 
 
 class ChatListSerializer(ModelSerializer):
+    last_message_text = CharField(allow_null=True)
+    last_message_date = CharField(allow_null=True)
+    chat_name = CharField()
+    image = SerializerMethodField()
+
+    def get_image(self, instance: dict):
+        if instance["is_group"]:
+            return f"assets/images/group-chat-image.jpg"
+        user = ChatUser.objects.filter(~Q(user_id=self.context["request"].user.id)).first().user
+        if user.image:
+            return f"http://localhost:8000/media/images{user.image.url}"
+        return None
 
     class Meta:
         model = Chat
-        fields = ("id", "last_message_text", "last_message_date", "created_at")
+        fields = ("id", "last_message_text", "is_group", "chat_name", "image", "last_message_date", "created_at")
 
 
 class ChatDisplaySerializer(ModelSerializer):

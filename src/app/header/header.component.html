@@ -18,7 +18,7 @@
       </mat-autocomplete>
     </mat-form-field>
     <ng-container *ngIf="isAuthenticated; else showLoginButton">
-      <div class="flex-item"><img src="{{user?.image}}" class="header-logo"></div>
+      <div class="flex-item"><img src="{{user?.image || 'assets/images/empty-user.jpg'}}" class="header-logo"></div>
       <div class="flex-item"><span class="user-name">{{user?.lastName}} {{user?.firstName}}</span></div>
     </ng-container>
     <ng-template #showLoginButton>

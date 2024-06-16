@@ -2,7 +2,8 @@
   <div class="post">
     <div class="header">
       <div class="author-info">
-        <img src="{{ post?.owner_image ? post?.owner_image : 'assets/images/empty-user.jpg' }}" class="thumbnail">
+        <img *ngIf="post?.owner_image" src="{{ post?.owner_image ? post?.owner_image : 'assets/images/empty-user.jpg' }}" class="thumbnail">
+        <img *ngIf="!post?.owner_image" src="{{ 'assets/images/empty-user.jpg' }}" class="thumbnail">
         <div class="username">{{ post?.owner_username }}</div>
       </div>
       <div class="post-meta">
@@ -28,7 +29,8 @@
   <div class="comments-container">
     <div class="comment" *ngFor="let comment of this.post.comments">
       <div class="comment-header">
-        <img src="{{ comment.user_image }}" class="thumbnail">
+        <img *ngIf="comment.user_image" src="{{ comment.user_image.replace(':4200', ':8000') }}" class="thumbnail">
+        <img *ngIf="!comment.user_image" src="assets/images/empty-user.jpg" class="thumbnail">
       </div>
       <div class="comment-body">
         <div class="username">{{comment.username}}</div>

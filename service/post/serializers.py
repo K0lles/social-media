@@ -43,6 +43,7 @@ class MyPostSerializer(ModelSerializer):
 class AnotherPeoplePosts(ModelSerializer):
     owner_username = SerializerMethodField()
     owner_image = SerializerMethodField()
+    comments_amount = IntegerField()
 
     def get_owner_username(self, instance: Post):
         return instance.owner.username
@@ -96,7 +97,9 @@ class CommentDisplaySerializer(ModelSerializer):
         return instance.user.username
 
     def get_user_image(self, instance: Comment) -> str:
-        return self.context["request"].build_absolute_uri(instance.user.image.url)
+        if instance.user.image:
+            return self.context["request"].build_absolute_uri(instance.user.image.url)
+        return None
 
     class Meta:
         model = Comment
@@ -115,7 +118,7 @@ class PostDetailSerializer(ModelSerializer):
         return self.context["request"].build_absolute_uri(instance.owner.image.url)
 
     def get_comments(self, instance: Post) -> list[dict]:
-        comments = instance.comments.all().order_by("-created_at")
+        comments = instance.comments.all().order_by("created_at")
         return CommentDisplaySerializer(instance=comments, many=True, context={"request": self.context["request"]}).data
 
     class Meta:

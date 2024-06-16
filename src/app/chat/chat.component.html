@@ -2,10 +2,9 @@
   <div class="main">
     <div class="header">
       <ng-container *ngIf="this.chat?.is_group">
-        <img src="assets/images/avatar-jessica.jpeg" class="chat-user-logo">
+        <img src="assets/images/group-chat-image.jpg" class="chat-user-logo">
         <div class="user-info">
           <h2>{{ this.chat.name }}</h2>
-<!--          <p>@username</p>-->
         </div>
       </ng-container>
       <ng-container *ngIf="!this.chat.is_group && this.chat.users && this.chat.users.length > 0">
