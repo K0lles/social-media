@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     "drf_extra_fields",
     "service.post",
     "service.chat",
+    "django_extensions",
 ]
 
 MIDDLEWARE = [
@@ -120,20 +121,7 @@ SIMPLE_JWT = {
 # Password validation
 # https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators
 
-AUTH_PASSWORD_VALIDATORS = [
-    {
-        "NAME": "django.contrib.auth_users.password_validation.UserAttributeSimilarityValidator",
-    },
-    {
-        "NAME": "django.contrib.auth_users.password_validation.MinimumLengthValidator",
-    },
-    {
-        "NAME": "django.contrib.auth_users.password_validation.CommonPasswordValidator",
-    },
-    {
-        "NAME": "django.contrib.auth_users.password_validation.NumericPasswordValidator",
-    },
-]
+AUTH_PASSWORD_VALIDATORS = []
 
 
 # Internationalization

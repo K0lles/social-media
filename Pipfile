@@ -13,6 +13,7 @@ django-cors-headers = "*"
 pillow = "*"
 drf-extra-fields = "*"
 channels = "*"
+django-extensions = "*"
 
 [dev-packages]
 
@@ -22,3 +23,4 @@ python_version = "3.11"
 [scripts]
 shell = "python manage.py shell"
 dev-server = "python manage.py runserver"
+script = "python manage.py runscript"

@@ -4,8 +4,8 @@
     <div class="flex-item"><h3>Social Media App</h3></div>
   </div>
   <div class="inner-header-block">
-    <mat-form-field style="margin-top: 10px; margin-right: 20px;">
-      <mat-label>Select chat</mat-label>
+    <mat-form-field *ngIf="user" style="margin-top: 10px; margin-right: 20px;">
+      <mat-label>Select user...</mat-label>
       <input type="text" matInput [formControl]="userControl" [matAutocomplete]="auto">
       <mat-autocomplete #auto="matAutocomplete"
                         [displayWith]="displayFn"

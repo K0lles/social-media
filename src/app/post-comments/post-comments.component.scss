@@ -2,7 +2,7 @@
 @import "src/app/post-list/post-list.component.scss";
 
 .comments-container {
-  width: 66%;
+  width: 50%;
   display: flex;
   flex-flow: column;
   align-items: center;
@@ -62,7 +62,7 @@
 
 .add-comment {
   display: flex;
-  width: 66%;
+  width: 50%;
   margin-top: 10px;
   align-items: center;
 

@@ -15,29 +15,11 @@ class MessageViewSet(BaseModelViewSet):
         "list": serializers.MessageDisplaySerializer,
     }
 
-    # def get_queryset(self):
-    #     return (
-    #         Message.objects.filter(Q(sender=self.request.user.id) | Q(receiver=self.request.user.id))
-    #         .annotate(
-    #             chat_user_id=When(Case(receiver_id=self.request.user.id), then=F("sender__username")),
-    #             default=F("sender__username"),
-    #         )
-    #         .distinct("chat_user_id")
-    #         .values("chat_user_id")
-    #     )
-
     def list(self, request, *args, **kwargs) -> Response:
         messages = Message.objects.filter(chat_id=self.request.query_params.get("chat_id"))
         return Response(data=self.get_serializer(messages, many=True).data, status=status.HTTP_200_OK)
-        # Chat.objects.filter(chat_users__user_id=self.request.user.id).annotate(
-        #     last_message_text=Subquery(Message.objects.filter(chat_id=OuterRef("id")).order_by("-created_at").values("text")[:1]),
-        #     last_message_user_id=Subquery(Message.objects.filter(chat_id=OuterRef("id")).order_by("-created_at").values("sender_id")[:1]),
-        #     last_message_date=Subquery(Message.objects.filter(chat_id=OuterRef("id")).order_by("-created_at").values("created_at")[:1]),
-        # )
-        # pass
 
     def create(self, request, *args, **kwargs) -> Response:
-        # TODO: add websocket event
         serializer = self.get_serializer(data=request.data, context={"sender": self.request.user})
         if serializer.is_valid():
             serializer.save()

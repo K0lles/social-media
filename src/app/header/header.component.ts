@@ -22,7 +22,7 @@ export class HeaderComponent implements OnInit {
   async ngOnInit() {
     this.authService.getUsersForSearch().subscribe(
       (response) => {
-        this.users = response;
+        this.users = response.filter((user) => user.id != this.authService.user?.id);
         this.filteredUsers = of(this.users);
         this.filteredUsers = this.userControl.valueChanges.pipe(
           startWith(''),

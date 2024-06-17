@@ -35,71 +35,8 @@
             </div>
           </ng-template>
         </ng-container>
-<!--        <div *ngFor="let message of messageList"-->
-<!--             [ngClass]="{-->
-<!--                'message mine': message.sender_username == this.user?.username,-->
-<!--                'message theirs': message.sender_username != this.user?.username-->
-<!--              }">-->
-<!--          <div *ngIf="this.chat && this.chat?.is_group" class="username">{{ message.sender_username }}</div>-->
-<!--          <p>{{message.text}}</p>-->
-<!--          <span class="time">{{ message.created_at | date : "YYYY-MM-dd hh:mm" }}</span>-->
-<!--        </div>-->
       </div>
     </ng-container>
-<!--    <div class="messages" #messagesContainer>-->
-<!--      <div class="message mine">-->
-<!--        <p>Це моє повідомлення</p>-->
-<!--      </div>-->
-<!--      <div class="message theirs">-->
-<!--        <p>Це повідомлення співбесідника</p>-->
-<!--      </div>-->
-<!--      <div class="message mine">-->
-<!--        <p>Це моє повідомлення</p>-->
-<!--      </div>-->
-<!--      <div class="message theirs">-->
-<!--        <p>Це повідомлення співбесідника</p>-->
-<!--      </div>-->
-<!--      <div class="message mine">-->
-<!--        <p>Це моє повідомлення</p>-->
-<!--      </div>-->
-<!--      <div class="message theirs">-->
-<!--        <p>Це повідомлення співбесідника</p>-->
-<!--      </div>-->
-<!--      <div class="message mine">-->
-<!--        <p>Це моє повідомлення</p>-->
-<!--      </div>-->
-<!--      <div class="message theirs">-->
-<!--        <p>Це повідомлення співбесідника</p>-->
-<!--      </div>-->
-<!--      <div class="message mine">-->
-<!--        <p>Це моє повідомлення</p>-->
-<!--      </div>-->
-<!--      <div class="message theirs">-->
-<!--        <p>Це повідомлення співбесідника</p>-->
-<!--      </div>-->
-<!--      <div class="message mine">-->
-<!--        <p>Це моє повідомлення</p>-->
-<!--      </div>-->
-<!--      <div class="message theirs">-->
-<!--        <p>Це повідомлення співбесідника</p>-->
-<!--      </div>-->
-<!--      <div class="message mine">-->
-<!--        <p>Це моє повідомлення</p>-->
-<!--      </div>-->
-<!--      <div class="message theirs">-->
-<!--        <p>Це повідомлення співбесідника</p>-->
-<!--      </div>-->
-<!--      <div class="message mine">-->
-<!--        <p>Це моє повідомлення</p>-->
-<!--        <span class="time">12:01 PM</span>-->
-<!--      </div>-->
-<!--      <div class="message theirs">-->
-<!--        <div class="username">User1</div>-->
-<!--        <p>Це повідомлення співбесідника </p>-->
-<!--        <span class="time">12:01 PM</span>-->
-<!--      </div>-->
-
-<!--    </div>-->
 
     <form [formGroup]="messageForm" class="input-area" (ngSubmit)="send()">
       <mat-form-field appearance="fill">
